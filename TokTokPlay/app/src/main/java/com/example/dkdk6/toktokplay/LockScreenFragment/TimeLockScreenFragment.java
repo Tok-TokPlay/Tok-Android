@@ -21,21 +21,26 @@ import java.util.Date;
  */
 
 public class TimeLockScreenFragment extends Fragment {
-    private TextView timeValueDate,timeValueTime, timeValueA;
+    private TextView timeValueDate, timeValueTime, timeValueA;
     private Handler handler;
-    private int touchCount =0;
+    private int touchCount = 0;
     private static final int TIMER_TICK_ID = 0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.timefragment, container, false);
         timeValueDate = (TextView) view.findViewById(R.id.timeFragmenDate);
         timeValueTime = (TextView) view.findViewById(R.id.timeFragmentTime);
-        timeValueA  = (TextView) view.findViewById(R.id.timeFragmentTimeA);
+        timeValueA = (TextView) view.findViewById(R.id.timeFragmentTimeA);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 touchCount++;
+                if (touchCount >= 2) {
+                    touchCount = 0;
+                    ((LockScreenActivity) getActivity()).finish();
+                }
             }
         });
         handler = new Handler() {
@@ -49,16 +54,13 @@ public class TimeLockScreenFragment extends Fragment {
                     timeValueDate.setText("" + dateFormat.format(today));
                     timeValueTime.setText("" + timeFormat.format(today));
                     timeValueA.setText("" + timeFormat3.format(today));
-                    if(touchCount>=2){
-                        touchCount=0;
-                        ((LockScreenActivity) getActivity()).finish();
-                    }
+                    touchCount = 0;
                     sendEmptyMessageDelayed(TIMER_TICK_ID, 1000);
                 }
             }
         };
         handler.sendEmptyMessage(TIMER_TICK_ID);
-        return view;
+          return view;
     }
 
 }

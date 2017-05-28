@@ -15,6 +15,7 @@ import android.os.IBinder;
 public class ScreenService extends Service {
     private ScreenReceiver mReceiver = null;
     private PackageReceiver pReceiver;
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
