@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ import com.example.dkdk6.toktokplay.R;
 
 import java.util.ArrayList;
 
-public class MusicActivity extends AppCompatActivity implements View.OnClickListener {
+public class MusicActivity extends AppCompatActivity{
     private ArrayList<MusicDto> list;
     private MediaPlayer mediaPlayer;
     private TextView title;
@@ -29,13 +30,41 @@ public class MusicActivity extends AppCompatActivity implements View.OnClickList
     private SeekBar seekBar;
     boolean isPlaying = true;
     private ContentResolver res;
-    private ProgressUpdate progressUpdate;
+    public static Uri uri;
+//    private ProgressUpdate progressUpdate;
     private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_music);
+        setContentView(R.layout.service_music);
+        /*도경도전*/
+        Button b1 = (Button) findViewById(R.id.button1);
+        Button b2 = (Button) findViewById(R.id.button2);
+        b1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // 서비스 시작하기
+                Log.d("test", "액티비티-서비스 시작버튼클릭");
+                playMusic(list.get(position));
+                Log.d("test", "액티비티-서비스 시작버튼클릭2");
+                Intent intent = new Intent(
+                        getApplicationContext(),//현재제어권자
+                        MyService.class); // 이동할 컴포넌트
+                startService(intent); // 서비스 시작
+            }
+        });
+
+        b2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // 서비스 종료하기
+                Log.d("test", "액티비티-서비스 종료버튼클릭");
+                Intent intent = new Intent(
+                        getApplicationContext(),//현재제어권자
+                        MyService.class); // 이동할 컴포넌트
+                stopService(intent); // 서비스 종료
+            }
+        });
+      //
         Intent intent = getIntent();
         mediaPlayer = new MediaPlayer();
         title = (TextView) findViewById(R.id.title);
@@ -51,15 +80,15 @@ public class MusicActivity extends AppCompatActivity implements View.OnClickList
         pause = (ImageView) findViewById(R.id.pause);
         next = (ImageView) findViewById(R.id.next);
 
-        previous.setOnClickListener(this);
+     /*   previous.setOnClickListener(this);
         play.setOnClickListener(this);
         pause.setOnClickListener(this);
-        next.setOnClickListener(this);
-        playMusic(list.get(position));
-        progressUpdate = new ProgressUpdate();
-        progressUpdate.start();
+        next.setOnClickListener(this);*/
+    //    playMusic(list.get(position));
+   //     progressUpdate = new ProgressUpdate();
+   //     progressUpdate.start();
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+ /*       seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
@@ -87,16 +116,18 @@ public class MusicActivity extends AppCompatActivity implements View.OnClickList
                     playMusic(list.get(position));
                 }
             }
-        });
+        });*/
     }
 
     public void playMusic(MusicDto musicDto) {
-        try {
+        uri = Uri.withAppendedPath(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + musicDto.getId());
+        /*try {
             seekBar.setProgress(0);
             title.setText(musicDto.getArtist() + " - " + musicDto.getTitle());
             Uri musicURI = Uri.withAppendedPath(
                     MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + musicDto.getId());
-            mediaPlayer.reset();
+         mediaPlayer.reset();
             mediaPlayer.setDataSource(this, musicURI);
             mediaPlayer.prepare();
             mediaPlayer.start();
@@ -115,7 +146,7 @@ public class MusicActivity extends AppCompatActivity implements View.OnClickList
 
         } catch (Exception e) {
             Log.e("SimplePlayer", e.getMessage());
-        }
+        }*/
     }
 
     //앨범이 저장되어 있는 경로를 리턴합니다.
@@ -136,7 +167,7 @@ public class MusicActivity extends AppCompatActivity implements View.OnClickList
         albumCursor.close();
         return result;
     }
-
+/*
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -170,7 +201,7 @@ public class MusicActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
+/*
     class ProgressUpdate extends Thread {
         @Override
         public void run() {
@@ -187,7 +218,8 @@ public class MusicActivity extends AppCompatActivity implements View.OnClickList
             }
         }
     }
-
+    */
+/*
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -197,4 +229,5 @@ public class MusicActivity extends AppCompatActivity implements View.OnClickList
             mediaPlayer = null;
         }
     }
+    */
 }
