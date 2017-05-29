@@ -4,6 +4,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,72 +22,51 @@ import com.example.dkdk6.toktokplay.R;
 
 import java.util.ArrayList;
 
-public class MusicActivity extends AppCompatActivity{
+/**
+ * Created by dkdk6 on 2017-05-29.
+ */
+
+public class MusicPlayerActivity extends AppCompatActivity implements View.OnClickListener {
+    public static Uri playerUri;
+    public static int PAUSE_CHECKING_FLAG=0;
+    public static int OVER_CHECKING_FLAG = 0; //음악 백그라운드 중복재생 방지
     private ArrayList<MusicDto> list;
-    private MediaPlayer mediaPlayer;
+    public static MediaPlayer playerInMediaPlayer;
     private TextView title;
     private ImageView album, previous, play, pause, next;
     private SeekBar seekBar;
     boolean isPlaying = true;
     private ContentResolver res;
-    public static Uri uri;
+    private ProgressUpdate progressUpdate;
     private int position;
-
+    private Intent intent2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.service_music);
-        /*도경도전*/
-        Button b1 = (Button) findViewById(R.id.button1);
-        Button b2 = (Button) findViewById(R.id.button2);
-        b1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // 서비스 시작하기
-                Log.d("test", "액티비티-서비스 시작버튼클릭");
-                playMusic(list.get(position));
-                Log.d("test", "액티비티-서비스 시작버튼클릭2");
-                Intent intent = new Intent(
-                        getApplicationContext(),//현재제어권자
-                        MusicService.class); // 이동할 컴포넌트
-                startService(intent); // 서비스 시작
-            }
-        });
-
-        b2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // 서비스 종료하기
-                Log.d("test", "액티비티-서비스 종료버튼클릭");
-                Intent intent = new Intent(
-                        getApplicationContext(),//현재제어권자
-                        MusicService.class); // 이동할 컴포넌트
-                stopService(intent); // 서비스 종료
-            }
-        });
-      //
+        setContentView(R.layout.activity_music);
         Intent intent = getIntent();
-        mediaPlayer = new MediaPlayer();
+        playerInMediaPlayer = new MediaPlayer();
+        intent2 = new Intent(
+                getApplicationContext(),//현재제어권자
+                MusicService.class); // 이동할 컴포넌트
         title = (TextView) findViewById(R.id.title);
         album = (ImageView) findViewById(R.id.album);
         seekBar = (SeekBar) findViewById(R.id.seekbar);
-
         position = intent.getIntExtra("position", 0);
         list = (ArrayList<MusicDto>) intent.getSerializableExtra("playlist");
         res = getContentResolver();
-
         previous = (ImageView) findViewById(R.id.pre);
         play = (ImageView) findViewById(R.id.play);
         pause = (ImageView) findViewById(R.id.pause);
         next = (ImageView) findViewById(R.id.next);
-
-     /*   previous.setOnClickListener(this);
+        previous.setOnClickListener(this);
         play.setOnClickListener(this);
         pause.setOnClickListener(this);
-        next.setOnClickListener(this);*/
-    //    playMusic(list.get(position));
-   //     progressUpdate = new ProgressUpdate();
-   //     progressUpdate.start();
-
- /*       seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        next.setOnClickListener(this);
+        playMusic(list.get(position));//일단 position실행
+        progressUpdate = new ProgressUpdate();
+        progressUpdate.start();
+/*        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
@@ -93,19 +74,20 @@ public class MusicActivity extends AppCompatActivity{
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.pause();
+//Service단에 요청
+                playerInMediaPlayer.pause();
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.seekTo(seekBar.getProgress());
+                playerInMediaPlayer.seekTo(seekBar.getProgress());
                 if (seekBar.getProgress() > 0 && play.getVisibility() == View.GONE) {
-                    mediaPlayer.start();
+                    playerInMediaPlayer.start();
                 }
             }
         });
 
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        playerInMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 if (position + 1 < list.size()) {
@@ -117,33 +99,27 @@ public class MusicActivity extends AppCompatActivity{
     }
 
     public void playMusic(MusicDto musicDto) {
-        uri = Uri.withAppendedPath(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + musicDto.getId());
-        /*try {
+        stopService(intent2);
+        try {
             seekBar.setProgress(0);
             title.setText(musicDto.getArtist() + " - " + musicDto.getTitle());
-            Uri musicURI = Uri.withAppendedPath(
-                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + musicDto.getId());
-         mediaPlayer.reset();
-            mediaPlayer.setDataSource(this, musicURI);
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-            seekBar.setMax(mediaPlayer.getDuration());
-            if (mediaPlayer.isPlaying()) {
+            playerUri = Uri.withAppendedPath(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + musicDto.getId());
+            //Start Music//
+            // mediaPlayer.start();
+            seekBar.setMax(playerInMediaPlayer.getDuration());
+            if (playerInMediaPlayer.isPlaying()) {
                 play.setVisibility(View.GONE);
                 pause.setVisibility(View.VISIBLE);
             } else {
                 play.setVisibility(View.VISIBLE);
                 pause.setVisibility(View.GONE);
             }
-
-
             Bitmap bitmap = BitmapFactory.decodeFile(getCoverArtPath(Long.parseLong(musicDto.getAlbumId()), getApplication()));
             album.setImageBitmap(bitmap);
-
+            startService(intent2); // 서비스 시작
         } catch (Exception e) {
             Log.e("SimplePlayer", e.getMessage());
-        }*/
+        }
     }
 
     //앨범이 저장되어 있는 경로를 리턴합니다.
@@ -164,21 +140,25 @@ public class MusicActivity extends AppCompatActivity{
         albumCursor.close();
         return result;
     }
-/*
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.play:
                 pause.setVisibility(View.VISIBLE);
                 play.setVisibility(View.GONE);
-                mediaPlayer.seekTo(mediaPlayer.getCurrentPosition());
-                mediaPlayer.start();
+                //Service구현//
+                //일시 정지 후 시작하는 경우임
+                stopService(intent2);
+
+                //  mediaPlayer.start();
 
                 break;
             case R.id.pause:
                 pause.setVisibility(View.GONE);
                 play.setVisibility(View.VISIBLE);
-                mediaPlayer.pause();
+                startService(intent2);
+                //playerInMediaPlayer.pause();
                 break;
             case R.id.pre:
                 if (position - 1 >= 0) {
@@ -198,15 +178,15 @@ public class MusicActivity extends AppCompatActivity{
         }
     }
 
-/*
+
     class ProgressUpdate extends Thread {
         @Override
         public void run() {
             while (isPlaying) {
                 try {
                     Thread.sleep(500);
-                    if (mediaPlayer != null) {
-                        seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                    if (playerInMediaPlayer != null) {
+                        seekBar.setProgress(playerInMediaPlayer.getCurrentPosition());
                     }
                 } catch (Exception e) {
                     Log.e("ProgressUpdate", e.getMessage());
@@ -215,16 +195,14 @@ public class MusicActivity extends AppCompatActivity{
             }
         }
     }
-    */
-/*
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         isPlaying = false;
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
+        if (playerInMediaPlayer != null) {
+            playerInMediaPlayer.release();
+            playerInMediaPlayer = null;
         }
     }
-    */
 }

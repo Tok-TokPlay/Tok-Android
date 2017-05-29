@@ -19,7 +19,8 @@ import com.example.dkdk6.toktokplay.R;
 import java.util.ArrayList;
 
 
-public class MusicListActivity extends AppCompatActivity {
+public class DirectMusicListActivity extends AppCompatActivity {
+
     private ListView listView;
     public static ArrayList<MusicDto> list;
     private static String TAG = "PermissionDemo";
@@ -40,7 +41,7 @@ public class MusicListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MusicListActivity.this, MusicActivity.class);
+                Intent intent = new Intent( DirectMusicListActivity.this, MusicPlayerActivity.class);
                 intent.putExtra("position", position);
                 intent.putExtra("playlist", list);
                 startActivity(intent);
@@ -69,8 +70,6 @@ public class MusicListActivity extends AppCompatActivity {
     public void getMusicList() {
         int count=0;
         list = new ArrayList<>();
-        String[] searchResultTitle = {"I LOVE YOU", "Let It Go", "서쪽 하늘"};
-        String[] searchResultArtist = {"2NE1","Idina Menzel","울랄라 세션"};
         //가져오고 싶은 컬럼 명을 나열합니다. 음악의 아이디, 앰블럼 아이디, 제목, 아스티스트 정보를 가져옵니다.
         String[] projection = {MediaStore.Audio.Media._ID,
                 MediaStore.Audio.Media.ALBUM_ID,
@@ -80,20 +79,12 @@ public class MusicListActivity extends AppCompatActivity {
         Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 projection, null, null, null);
         while (cursor.moveToNext()) {
-            if(count<searchResultTitle.length){
-                if((cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)).equals(searchResultTitle[count]))&&(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)).equals(searchResultArtist[count]))){
-                    Log.i("T같은 가수","입니다.");
-                    count++;
-                    Log.i("같은 가수","입니다.");
-                    MusicDto musicDto = new MusicDto();
-                    musicDto.setId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
-                    musicDto.setAlbumId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
-                    musicDto.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
-                    musicDto.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
-                    list.add(musicDto);
-                }
-            }
-
+            MusicDto musicDto = new MusicDto();
+            musicDto.setId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
+            musicDto.setAlbumId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
+            musicDto.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
+            musicDto.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
+            list.add(musicDto);
         }
         cursor.close();
     }

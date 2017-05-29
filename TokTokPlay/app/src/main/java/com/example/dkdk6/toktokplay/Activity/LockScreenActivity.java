@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.WindowManager;
 
 
@@ -29,7 +28,7 @@ public class LockScreenActivity extends AppCompatActivity  {
             @Override
             public void onPageSelected(int position) {
                 if(position == adapter.PosNavigate){
-                    Intent intent = new Intent(LockScreenActivity.this,TouchScreenActivity.class);
+                    Intent intent = new Intent(LockScreenActivity.this,SearchingActivity.class);
                     startActivity(intent);
                     finish();
                 }
