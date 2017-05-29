@@ -1,0 +1,30 @@
+#Internal package file, do not edit.
+#Tue May 30 00:05:23 KST 2017
+2.base=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_
+5.file=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\intents_demo.xml
+5.set=ANDROID_RESOURCE
+3.base=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_
+6.file=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_a7dfac4a2a80879d0bbde0c4a0a539b27191c4a8\\classes.dex
+2.set=ANDROID_RESOURCE
+4.base=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_d28b647439102a2841f63ab1158f081baaa1054a
+7.file=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\action_bar_demo.xml
+7.set=ANDROID_RESOURCE
+count=9
+0.file=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_\\AndroidManifest.xml
+5.base=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_
+8.file=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\list_item.xml
+4.set=DEX
+6.base=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_a7dfac4a2a80879d0bbde0c4a0a539b27191c4a8
+1.file=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-mdpi-v4\\no_thumbnail.png
+1.set=ANDROID_RESOURCE
+7.base=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_
+2.file=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_\\resources.arsc
+6.set=DEX
+0.base=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_
+8.base=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_
+3.file=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-mdpi-v4\\loading_thumbnail.png
+3.set=ANDROID_RESOURCE
+1.base=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\resources-debug.ap_
+4.file=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_d28b647439102a2841f63ab1158f081baaa1054a\\classes.dex
+8.set=ANDROID_RESOURCE
+0.set=ANDROID_RESOURCE

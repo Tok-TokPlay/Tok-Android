@@ -1,0 +1,4 @@
+#Mon May 29 00:15:05 KST 2017
+base.0=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\YouTubeAndroidPlayerApi_2b44475c15aa9d477dcd9ec53b91ed4f23644c73
+renamed.0=classes.dex
+file.0=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\YouTubeAndroidPlayerApi_2b44475c15aa9d477dcd9ec53b91ed4f23644c73\\classes.dex

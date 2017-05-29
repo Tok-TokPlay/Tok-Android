@@ -14,23 +14,37 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+
+
+
   <TextView
+      android:id="@+id/textView"
+      android:layout_centerVertical="true"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/intent_select"
-      android:textAppearance="?android:attr/textAppearanceLarge"
-      android:textColor="@android:color/white" />
+      android:text="Type the music's title : " />
 
-  <ListView
-      android:id="@+id/intent_list"
+
+  <EditText
+      android:id="@+id/musicTitle"
       android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1" />
+      android:layout_height="wrap_content"
+      android:layout_toRightOf="@id/textView"
+      android:layout_alignBottom="@+id/textView"
+      android:text="                    "
+      />
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/searchBtn"
+      android:text="Search!"
+      android:layout_below="@+id/textView"
+      android:layout_alignParentLeft="true" />
 
   <TextView
       android:id="@+id/youtube_version_text"
@@ -40,4 +54,4 @@
       android:textAppearance="?android:attr/textAppearanceSmall"
       android:textColor="@color/gray" />
 
-</LinearLayout>
+</RelativeLayout>

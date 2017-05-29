@@ -25,118 +25,16 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <application android:label="@string/youtube_api_demo" >
+    <application android:label="@string/intents_demo_name" >
         <activity
-            android:name="com.examples.youtubeapidemo.YouTubeAPIDemoActivity"
-            android:label="@string/youtube_api_demo" >
+            android:name="com.examples.youtubeapidemo.IntentsDemoActivity"
+            android:label="@string/intents_demo_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <meta-data
-                android:name="@string/isLaunchableActivity"
-                android:value="false" />
-        </activity>
-        <activity
-            android:name="com.examples.youtubeapidemo.VideoWallDemoActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/videowall_demo_name"
-            android:screenOrientation="landscape"
-            android:theme="@style/BlackNoBarsTheme" >
-            <meta-data
-                android:name="@string/minVersion"
-                android:value="11" />
-            <meta-data
-                android:name="@string/isLaunchableActivity"
-                android:value="true" />
-        </activity>
-        <activity
-            android:name="com.examples.youtubeapidemo.VideoListDemoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/videolist_demo_name" >
-            <meta-data
-                android:name="@string/minVersion"
-                android:value="13" />
-            <meta-data
-                android:name="@string/isLaunchableActivity"
-                android:value="true" />
-        </activity>
-        <activity
-            android:name="com.examples.youtubeapidemo.PlayerViewDemoActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/playerview_demo_name"
-            android:screenOrientation="nosensor" >
-            <meta-data
-                android:name="@string/minVersion"
-                android:value="8" />
-            <meta-data
-                android:name="@string/isLaunchableActivity"
-                android:value="true" />
-        </activity>
-        <activity
-            android:name="com.examples.youtubeapidemo.FragmentDemoActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/fragment_demo_name"
-            android:screenOrientation="nosensor" >
-            <meta-data
-                android:name="@string/minVersion"
-                android:value="11" />
-            <meta-data
-                android:name="@string/isLaunchableActivity"
-                android:value="true" />
-        </activity>
-        <activity
-            android:name="com.examples.youtubeapidemo.PlayerControlsDemoActivity"
-            android:label="@string/player_controls_demo_name"
-            android:windowSoftInputMode="stateHidden" >
-            <meta-data
-                android:name="@string/minVersion"
-                android:value="8" />
-            <meta-data
-                android:name="@string/isLaunchableActivity"
-                android:value="true" />
-        </activity>
-        <activity
-            android:name="com.examples.youtubeapidemo.FullscreenDemoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/fullscreen_demo_name"
-            android:screenOrientation="sensor"
-            android:theme="@style/BlackNoTitleBarTheme" >
-            <meta-data
-                android:name="@string/minVersion"
-                android:value="8" />
-            <meta-data
-                android:name="@string/isLaunchableActivity"
-                android:value="true" />
-        </activity>
-        <activity
-            android:name="com.examples.youtubeapidemo.ActionBarDemoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/action_bar_demo_name"
-            android:screenOrientation="sensorLandscape"
-            android:theme="@style/OverlayActionBarTheme" >
-            <meta-data
-                android:name="@string/minVersion"
-                android:value="11" />
-            <meta-data
-                android:name="@string/isLaunchableActivity"
-                android:value="true" />
-        </activity>
-        <activity
-            android:name="com.examples.youtubeapidemo.StandalonePlayerDemoActivity"
-            android:label="@string/standalone_player_demo_name" >
-            <meta-data
-                android:name="@string/minVersion"
-                android:value="8" />
-            <meta-data
-                android:name="@string/isLaunchableActivity"
-                android:value="true" />
-        </activity>
-        <activity
-            android:name="com.examples.youtubeapidemo.IntentsDemoActivity"
-            android:label="@string/intents_demo_name" >
             <meta-data
                 android:name="@string/minVersion"
                 android:value="8" />

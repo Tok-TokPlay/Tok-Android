@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\loading_thumbnail.png",
+        "source": "C:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\src\\main\\res\\drawable-mdpi\\loading_thumbnail.png"
+    },
+    {
+        "merged": "C:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\no_thumbnail.png",
+        "source": "C:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\src\\main\\res\\drawable-mdpi\\no_thumbnail.png"
+    }
+]

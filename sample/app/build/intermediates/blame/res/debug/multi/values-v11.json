@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\Public\\Documents\\andro\\sample\\app\\build\\intermediates\\res\\merged\\debug\\values-v11\\values-v11.xml",
+        "outputFile": "C:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 287
                 },
                 "from": {
-                    "file": "C:\\Users\\Public\\Documents\\andro\\sample\\app\\src\\main\\res\\values-v11\\styles.xml",
+                    "file": "C:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\src\\main\\res\\values-v11\\styles.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 2,
@@ -32,7 +32,7 @@
                     "endOffset": 356
                 },
                 "from": {
-                    "file": "C:\\Users\\Public\\Documents\\andro\\sample\\app\\src\\main\\res\\values-v11\\styles.xml",
+                    "file": "C:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\src\\main\\res\\values-v11\\styles.xml",
                     "position": {
                         "startLine": 25,
                         "startColumn": 2,
@@ -52,7 +52,7 @@
                     "endOffset": 496
                 },
                 "from": {
-                    "file": "C:\\Users\\Public\\Documents\\andro\\sample\\app\\src\\main\\res\\values-v11\\styles.xml",
+                    "file": "C:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\src\\main\\res\\values-v11\\styles.xml",
                     "position": {
                         "startLine": 18,
                         "startColumn": 2,

@@ -2,25 +2,31 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Public\Documents\andro\sample\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        is-multidex="true"
+        jar="C:\Users\4p\Desktop\Tok-Android\sample\app\libs\YouTubeAndroidPlayerApi.jar"
         jumboMode="true"
-        revision="25.0.0"
-        sha1="044911916570b8bd1d822b4ffd2279e2a51c5728">
-        <dex dex="C:\Users\Public\Documents\andro\sample\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_f51c04e2420412ec441d7d6b2b6b9989e649304e\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\Public\Documents\andro\sample\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        revision="25.0.0"
-        sha1="b5eedd35d764a1cd599de985311a6554e354cb36">
-        <dex dex="C:\Users\Public\Documents\andro\sample\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_0001ef86887cf2fc4dcef80e4670d616bd9dbda8\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\Public\Documents\andro\sample\app\libs\YouTubeAndroidPlayerApi.jar"
-        jumboMode="true"
+        optimize="true"
         revision="25.0.0"
         sha1="3c4f96ff493456651cc7bdb0b47e10eb25545a16">
-        <dex dex="C:\Users\Public\Documents\andro\sample\app\build\intermediates\transforms\dex\debug\folders\1000\2\YouTubeAndroidPlayerApi_505a72b34f4ae55c7baf9105feec8bd1e462fbc6\classes.dex" />
+        <dex dex="C:\Users\4p\Desktop\Tok-Android\sample\app\build\intermediates\transforms\dex\debug\folders\1000\2\YouTubeAndroidPlayerApi_2b44475c15aa9d477dcd9ec53b91ed4f23644c73\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\4p\Desktop\Tok-Android\sample\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b3536672a7f9e28f4e33b097b190abb7c21ebdd8">
+        <dex dex="C:\Users\4p\Desktop\Tok-Android\sample\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_a7dfac4a2a80879d0bbde0c4a0a539b27191c4a8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\4p\Desktop\Tok-Android\sample\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="C:\Users\4p\Desktop\Tok-Android\sample\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_d28b647439102a2841f63ab1158f081baaa1054a\classes.dex" />
     </item>
 
 </items>
