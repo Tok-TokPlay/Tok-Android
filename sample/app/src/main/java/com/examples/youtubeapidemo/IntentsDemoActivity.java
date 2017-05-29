@@ -57,10 +57,10 @@ public final class IntentsDemoActivity extends Activity{
     setContentView(R.layout.intents_demo);
     final EditText et = (EditText) findViewById(R.id.musicTitle);
     Button search = (Button) findViewById(R.id.searchBtn);
-    intent2 = YouTubeIntents.createSearchIntent(this, SONG_ID);
     search.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         SONG_ID = et.getText().toString();
+        intent2 = YouTubeIntents.createSearchIntent(IntentsDemoActivity.this, SONG_ID);
         startActivity(intent2);
       }
     });

@@ -1,4 +1,4 @@
-#Tue May 30 00:05:23 KST 2017
+#Tue May 30 00:26:31 KST 2017
 base.0=C\:\\Users\\4p\\Desktop\\Tok-Android\\sample\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_a7dfac4a2a80879d0bbde0c4a0a539b27191c4a8
 renamed.1=classes.dex
 renamed.0=classes2.dex
