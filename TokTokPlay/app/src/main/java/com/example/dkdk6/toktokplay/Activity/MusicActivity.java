@@ -17,6 +17,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.dkdk6.toktokplay.R;
+import com.example.dkdk6.toktokplay.Service_Receiver.MusicService;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,9 @@ public class MusicActivity extends AppCompatActivity{
     private ContentResolver res;
     public static Uri uri;
     private int position;
-
+    /*
+    현재 쓰지않고있는 Activity이다.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,15 +69,13 @@ public class MusicActivity extends AppCompatActivity{
         mediaPlayer = new MediaPlayer();
         title = (TextView) findViewById(R.id.title);
         album = (ImageView) findViewById(R.id.album);
-        seekBar = (SeekBar) findViewById(R.id.seekbar);
 
         position = intent.getIntExtra("position", 0);
         list = (ArrayList<MusicDto>) intent.getSerializableExtra("playlist");
         res = getContentResolver();
 
         previous = (ImageView) findViewById(R.id.pre);
-        play = (ImageView) findViewById(R.id.play);
-        pause = (ImageView) findViewById(R.id.pause);
+        play = (ImageView) findViewById(R.id.start_music);
         next = (ImageView) findViewById(R.id.next);
 
      /*   previous.setOnClickListener(this);

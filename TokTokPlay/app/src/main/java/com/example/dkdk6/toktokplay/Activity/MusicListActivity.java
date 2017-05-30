@@ -24,7 +24,9 @@ public class MusicListActivity extends AppCompatActivity {
     public static ArrayList<MusicDto> list;
     private static String TAG = "PermissionDemo";
     private static final int REQUEST_CODE = 101;
-
+    /*
+    현재 쓰지않고있는 Activity이다.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

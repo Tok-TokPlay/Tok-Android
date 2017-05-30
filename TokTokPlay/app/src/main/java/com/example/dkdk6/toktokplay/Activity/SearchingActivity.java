@@ -30,7 +30,7 @@ public class SearchingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchactivity);
-        StartActivity.SELECT_FLAG_IN_DIRECT=0;
+        StartingActivity.SELECT_FLAG_IN_DIRECT=0;
         imageView = (ImageView) findViewById(R.id.imageView);
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(1000); //0.3초동안 진동
@@ -48,7 +48,7 @@ public class SearchingActivity extends AppCompatActivity {
 
     protected void receiveBeat() {
         if (timerStart == true) {
-            mCountDown = new CountDownTimer(1000, 10) {//1초
+            mCountDown = new CountDownTimer(1000, 10) {//1초 1000->10000
                 @Override
                 public void onTick(long l) {
                     imageView.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +85,7 @@ public class SearchingActivity extends AppCompatActivity {
 
     protected void sendToServer(ArrayList<String> rBeatArray) {
         //서버로 비트 전송//
-        Intent PlaymusicIntent = new Intent(SearchingActivity.this, MusicListActivity.class);
+        Intent PlaymusicIntent = new Intent(SearchingActivity.this, DirectMusicListActivity.class);
         startActivity(PlaymusicIntent);
         finish();
     }

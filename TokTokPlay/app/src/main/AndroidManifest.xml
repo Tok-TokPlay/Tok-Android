@@ -15,14 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Activity.StartActivity">
+        <activity android:name=".Activity.StartingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".Activity.MusicService"></service>
+        <service android:name=".Service_Receiver.MusicService"></service>
         <activity android:name=".Activity.LockScreenActivity"/>
         <service android:name=".Service_Receiver.ScreenService"/>
         <receiver android:name=".Service_Receiver.ScreenReceiver"/>

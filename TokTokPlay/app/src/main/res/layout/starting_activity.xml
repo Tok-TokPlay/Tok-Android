@@ -5,41 +5,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context="com.example.dkdk6.toktokplay.Activity.StartActivity">
+    android:background="#000000"
+    tools:context="com.example.dkdk6.toktokplay.Activity.StartingActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/startingactivity_background"/>
 
-    <RelativeLayout
-        android:id="@+id/firstLayout"
+    <ImageButton
+        android:id="@+id/onBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#80a47e7e"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:background="@android:color/transparent"
+        android:scaleType="fitStart"
+        android:src="@drawable/startingactivity_on_icon"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="30dp"
+         />
 
-        <ImageButton
-            android:id="@+id/btn1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="59dp"
-            android:layout_marginTop="21dp"
-            android:layout_toStartOf="@+id/btn2"
-            android:background="@android:color/transparent"
-            android:scaleType="fitStart"
-            android:src="@drawable/on" />
-
-        <ImageButton
-            android:id="@+id/btn2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/btn1"
-            android:layout_marginEnd="67dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitStart"
-            android:src="@drawable/off" />
-
-    </RelativeLayout>
+    <ImageButton
+        android:id="@+id/offBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:scaleType="fitStart"
+        android:src="@drawable/startingactivity_off_icon"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="210dp"/>
 
     <ImageButton
         android:id="@+id/searching_direct"
@@ -47,19 +39,22 @@
         android:layout_height="100dp"
         android:background="@android:color/transparent"
         android:scaleType="fitStart"
-        android:src="@drawable/logo"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:src="@drawable/startingactivity_searching_icon"
+        android:layout_below="@+id/onBtn"
+        android:layout_alignEnd="@+id/onBtn"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="19dp" />
 
     <ImageButton
         android:id="@+id/playMusic_direct"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="#60000000"
+        android:background="@null"
         android:scaleType="fitStart"
-        android:src="@drawable/play"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/searching_direct"
-        android:layout_marginBottom="45dp" />
+        android:src="@drawable/startingactivity_playing_icon"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/offBtn"
+        android:layout_toEndOf="@+id/onBtn"
+        android:layout_marginLeft="60dp"/>
 
 </RelativeLayout>

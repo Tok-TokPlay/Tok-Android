@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 
 import com.example.dkdk6.toktokplay.Activity.MusicActivity;
+import com.example.dkdk6.toktokplay.Activity.MusicPlayerActivity;
 import com.example.dkdk6.toktokplay.R;
 
 /**
@@ -49,7 +50,7 @@ public class ScreenService extends Service {
         Intent in = new Intent(this, MusicActivity.class);
         in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         NotificationManager notificationManager = (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
-        Intent intent1 = new Intent(this.getApplicationContext(), MusicActivity.class); //인텐트 생성.
+        Intent intent1 = new Intent(this.getApplicationContext(), MusicPlayerActivity.class); //인텐트 생성.
         Notification.Builder builder = new Notification.Builder(getApplicationContext());
         intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);//현재 액티비티를 최상으로 올리고, 최상의 액티비티를 제외한 모든 액티비티를없앤다.
         PendingIntent pendingNotificationIntent = PendingIntent.getActivity(this, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
