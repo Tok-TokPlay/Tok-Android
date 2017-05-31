@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.dkdk6.toktokplay.FlagControl;
 import com.example.dkdk6.toktokplay.R;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 
 public class SearchingActivity extends AppCompatActivity {
     private ImageView imageView;
-    private ArrayList<String> beatarray = new ArrayList<String>();
+    private ArrayList<Integer> beatarray = new ArrayList<Integer>();
     private boolean touch = false;
     private boolean timerStart = false;
     private CountDownTimer mCountDown = null;
@@ -30,7 +31,6 @@ public class SearchingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchactivity);
-        StartingActivity.SELECT_FLAG_IN_DIRECT=0;
         imageView = (ImageView) findViewById(R.id.imageView);
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(1000); //0.3초동안 진동
@@ -38,7 +38,7 @@ public class SearchingActivity extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                beatarray.add(new String("1"));
+                beatarray.add(1);
                 timerStart = true;
                 touch = true;
                 receiveBeat();
@@ -58,10 +58,10 @@ public class SearchingActivity extends AppCompatActivity {
                         }
                     });
                     if (touch == true) {
-                        beatarray.add(new String("1"));
+                        beatarray.add(1);
                         touch = false;
                     } else if (touch == false) {
-                        beatarray.add(new String("0"));
+                        beatarray.add(0);
                     }
                 }
 
@@ -73,7 +73,7 @@ public class SearchingActivity extends AppCompatActivity {
                     imageView.setEnabled(false);
                     Log.d("beatarry > ", "시간종료");
                     for (int k = 0; k < beatarray.size(); k++) {
-                        Log.d("beatarry > ", beatarray.get(k));
+                        Log.d("beatarry > ", ""+beatarray.get(k));
                     }
                     sendToServer(beatarray);
                     //searchingActivity로 넘어갈 것
@@ -83,9 +83,12 @@ public class SearchingActivity extends AppCompatActivity {
         }
     }
 
-    protected void sendToServer(ArrayList<String> rBeatArray) {
+    protected void sendToServer(ArrayList<Integer> rBeatArray) {
         //서버로 비트 전송//
-        Intent PlaymusicIntent = new Intent(SearchingActivity.this, DirectMusicListActivity.class);
+        /*
+        진희언니 작업 여기서 하면 되요!
+         */
+        Intent PlaymusicIntent = new Intent(SearchingActivity.this, WaitingResultActivity.class);
         startActivity(PlaymusicIntent);
         finish();
     }

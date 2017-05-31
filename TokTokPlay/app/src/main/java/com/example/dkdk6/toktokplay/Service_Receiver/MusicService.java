@@ -33,66 +33,34 @@ public class MusicService extends Service {
         if (musicObject == null) {
             musicObject = new MediaPlayer();
         }
-       /* if (musicObject == null) {
-            Log.i("Pause", "새로만듬");
-            musicObject = new MediaPlayer();
-        }
-        if (StartingActivity.SELECT_FLAG_IN_DIRECT == 1) {
-            if (MusicPlayerActivity.PAUSE_CHECKING_FLAG == 0) { //일시정지상태가 아니다
-                Log.i("들어오고", "있는가");
-                musicObject = MediaPlayer.create(this, MusicPlayerActivity.playerUri);
-            } else if (MusicPlayerActivity.PAUSE_CHECKING_FLAG == 1) { //일시정지가 걸린 상태다
-                onPause();
-            }
-        } else { //여기는 이제 검색해서 나온 곳 노래재생이야
-          //  musicObject = MediaPlayer.create(this, MusicActivity.uri);
-        }*/
     }
 
     public void onPause() {
         //일시정지의 가능성이 있는 상태
         Log.i("Pause", "들어옴");
-        if (this.SERVICE_PAUSE_FLAG == 1) { //SERVICE_PAUSE_FLAG는 Service에서 제어하기 위한
+        if (StartingActivity.flagControl.MUSIC_PAUSE==1) { //SERVICE_PAUSE_FLAG는 Service에서 제어하기 위한
             Log.i("Pause", "노래 시작상태");
             musicObject.seekTo(musicObject.getCurrentPosition());
             musicObject.start();
             //노래재생
-        } else if (this.SERVICE_PAUSE_FLAG == 0) {
+        } else if (StartingActivity.flagControl.MUSIC_PLAYING_NOW==1||StartingActivity.flagControl.MUSIC_PAUSE==0) {
             Log.i("Pause", "노래 정지");
+            StartingActivity.flagControl.MUSIC_PLAYING_NOW=1; //현재 노래 재생중임을 알린다.
             musicObject.pause();
         }
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // 서비스가 호출될 때마다 실행
-        /*if (StartingActivity.SELECT_FLAG_IN_DIRECT == 1) {
-            Log.i("들어오고2", "있는가");
-            if (MusicPlayerActivity.PAUSE_CHECKING_FLAG == 1) {
-                //일시정지의 경우
-                Log.i("들어오고2", "여긴가");
-                onPause();
-            }else {
-                musicObject.start();
-            }
-        } else {
-            musicObject.start();
-        }
-        //   musicObject.setLooping(false); // 반복재생*/
-        //도전중
-        if (StartingActivity.SELECT_FLAG_IN_DIRECT == 1) {
-            if (MusicPlayerActivity.PAUSE_CHECKING_FLAG == 0) { //일시정지상태가 아니다
-                Log.i("StartCommand", ""+MusicPlayerActivity.playerUri);
+            if (StartingActivity.flagControl.MUSIC_PLAYING_NOW==0) { //일시정지상태가 아니다
+                Log.i("StartCommand", "" + MusicPlayerActivity.playerUri);
                 musicObject = MediaPlayer.create(this, MusicPlayerActivity.playerUri);
                 musicObject.start();
-                MusicPlayerActivity.PAUSE_CHECKING_FLAG=1;
-            } else if (MusicPlayerActivity.PAUSE_CHECKING_FLAG == 1) { //일시정지가 걸린 상태다
-                Log.i("StartCommand->onPause", ""+MusicPlayerActivity.playerUri);
+                StartingActivity.flagControl.MUSIC_PLAYING_NOW=1; //현재 노래 재생중임을 알린다.
+            } else if (StartingActivity.flagControl.MUSIC_PLAYING_NOW==1/*||MusicPlayerActivity.PAUSE_CHECKING_FLAG == 1*/) { //일시정지가 걸린 상태다
+                Log.i("StartCommand->onPause", "" + MusicPlayerActivity.playerUri);
                 onPause();
             }
-        } else { //여기는 이제 검색해서 나온 곳 노래재생이야
-          //  musicObject = MediaPlayer.create(this, MusicActivity.uri);
-        }
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -100,6 +68,7 @@ public class MusicService extends Service {
     public void onDestroy() {
         super.onDestroy();
         // 서비스가 종료될 때 실행
+        StartingActivity.flagControl.MUSIC_PLAYING_NOW=0; //현재 노래 정지
         musicObject.stop(); // 음악 종료
         Log.d("test", "서비스의 onDestroy");
     }
