@@ -8,6 +8,7 @@ import android.view.WindowManager;
 
 
 import com.example.dkdk6.toktokplay.Adapter.LockScreenFragmentPagerAdapter;
+import com.example.dkdk6.toktokplay.FlagControl;
 import com.example.dkdk6.toktokplay.R;
 
 public class LockScreenActivity extends AppCompatActivity  {
@@ -17,7 +18,7 @@ public class LockScreenActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lockscreenactivity);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-        StartingActivity.flagControl.APP_SEARCHING_CONTROL=1;
+        FlagControl.APP_SEARCHING_CONTROL=1;
         viewPager = (ViewPager)findViewById(R.id.view_pager);
         adapter = new LockScreenFragmentPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);

@@ -1,18 +1,10 @@
 package com.example.dkdk6.toktokplay.Service_Receiver;
 
 import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
-
-import com.example.dkdk6.toktokplay.Activity.MusicActivity;
-import com.example.dkdk6.toktokplay.Activity.MusicPlayerActivity;
-import com.example.dkdk6.toktokplay.Activity.StartingActivity;
-import com.example.dkdk6.toktokplay.R;
 
 /**
  * Created by dkdk6 on 2017-03-23.

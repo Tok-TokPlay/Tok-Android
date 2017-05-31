@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.dkdk6.toktokplay.Activity.MusicPlayerActivity;
 import com.example.dkdk6.toktokplay.Activity.StartingActivity;
+import com.example.dkdk6.toktokplay.FlagControl;
 
 /**
  * Created by dkdk6 on 2017-05-29.
@@ -38,26 +39,26 @@ public class MusicService extends Service {
     public void onPause() {
         //일시정지의 가능성이 있는 상태
         Log.i("Pause", "들어옴");
-        if (StartingActivity.flagControl.MUSIC_PAUSE==1) { //SERVICE_PAUSE_FLAG는 Service에서 제어하기 위한
+        if (FlagControl.MUSIC_PAUSE==1) { //SERVICE_PAUSE_FLAG는 Service에서 제어하기 위한
             Log.i("Pause", "노래 시작상태");
             musicObject.seekTo(musicObject.getCurrentPosition());
             musicObject.start();
+            FlagControl.MUSIC_PLAYING_NOW=1; //현재 노래 재생중임을 알린다.
             //노래재생
-        } else if (StartingActivity.flagControl.MUSIC_PLAYING_NOW==1||StartingActivity.flagControl.MUSIC_PAUSE==0) {
+        } else if (FlagControl.MUSIC_PLAYING_NOW==1||FlagControl.MUSIC_PAUSE==0) {
             Log.i("Pause", "노래 정지");
-            StartingActivity.flagControl.MUSIC_PLAYING_NOW=1; //현재 노래 재생중임을 알린다.
             musicObject.pause();
         }
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-            if (StartingActivity.flagControl.MUSIC_PLAYING_NOW==0) { //일시정지상태가 아니다
+            if (FlagControl.MUSIC_PLAYING_NOW==0) { //일시정지상태가 아니다
                 Log.i("StartCommand", "" + MusicPlayerActivity.playerUri);
                 musicObject = MediaPlayer.create(this, MusicPlayerActivity.playerUri);
                 musicObject.start();
-                StartingActivity.flagControl.MUSIC_PLAYING_NOW=1; //현재 노래 재생중임을 알린다.
-            } else if (StartingActivity.flagControl.MUSIC_PLAYING_NOW==1/*||MusicPlayerActivity.PAUSE_CHECKING_FLAG == 1*/) { //일시정지가 걸린 상태다
+               FlagControl.MUSIC_PLAYING_NOW=1; //현재 노래 재생중임을 알린다.
+            } else if (FlagControl.MUSIC_PLAYING_NOW==1/*||MusicPlayerActivity.PAUSE_CHECKING_FLAG == 1*/) { //일시정지가 걸린 상태다
                 Log.i("StartCommand->onPause", "" + MusicPlayerActivity.playerUri);
                 onPause();
             }
@@ -68,7 +69,7 @@ public class MusicService extends Service {
     public void onDestroy() {
         super.onDestroy();
         // 서비스가 종료될 때 실행
-        StartingActivity.flagControl.MUSIC_PLAYING_NOW=0; //현재 노래 정지
+        FlagControl.MUSIC_PLAYING_NOW=0; //현재 노래 정지
         musicObject.stop(); // 음악 종료
         Log.d("test", "서비스의 onDestroy");
     }

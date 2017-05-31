@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dkdk6.toktokplay.FlagControl;
 import com.example.dkdk6.toktokplay.R;
 import com.example.dkdk6.toktokplay.Service_Receiver.MusicService;
 
@@ -30,7 +31,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
     public static Uri playerUri;
     public static int PAUSE_CHECKING_FLAG = 0;
     private ArrayList<MusicDto> list;
-    public static TextView title;
+    private TextView title;
     private ImageView album, previous, play, pause, next;
     private int play_flag = 0;
     private ContentResolver res;
@@ -56,8 +57,11 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
         previous.setOnClickListener(this);
         play.setOnClickListener(this);
         next.setOnClickListener(this);
+        if(FlagControl.NOTIFICATION_OPEN==1&&FlagControl.MUSIC_PLAYING_NOW==1){
+            album.setImageBitmap(FlagControl.nowalbum);
+            title.setText(FlagControl.nowTitle);
+        }
         playingMethods();
-
       /* 다음 곡 자동재생
        playerInMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -71,25 +75,25 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void playingMethods() {
-        if (StartingActivity.flagControl.ON_PLAY_LIST == 1 && StartingActivity.flagControl.MUSIC_PLAYING_NOW == 0) {
+        if (FlagControl.ON_PLAY_LIST == 1 && FlagControl.MUSIC_PLAYING_NOW == 0) {
             Log.i("Testing:리스트", "음악재생안되고있었음");
             playMusic(list.get(position));//일단 position실행
-            StartingActivity.flagControl.ON_PLAY_LIST = 0;
-        } else if (StartingActivity.flagControl.ON_PLAY_LIST == 1 && StartingActivity.flagControl.MUSIC_PLAYING_NOW == 1) {
+            FlagControl.ON_PLAY_LIST = 0;
+        } else if (FlagControl.ON_PLAY_LIST == 1 && FlagControl.MUSIC_PLAYING_NOW == 1) {
             Log.i("Testing:리스트", "음악재생되고있었음");
             stopService(intent2);
             playMusic(list.get(position));//일단 position실행
-            StartingActivity.flagControl.ON_PLAY_LIST = 0;
+            FlagControl.ON_PLAY_LIST = 0;
         }
-        if (StartingActivity.flagControl.APP_SEARCHING_CONTROL == 1 && StartingActivity.flagControl.MUSIC_PLAYING_NOW == 0) {
+        if (FlagControl.APP_SEARCHING_CONTROL == 1 && FlagControl.MUSIC_PLAYING_NOW == 0) {
             Log.i("Testing:MUSIC_NOW", "현재음악안재생중");
             playMusic(list.get(position));//일단 position실행
-            StartingActivity.flagControl.APP_SEARCHING_CONTROL = 0;
-        } else if (StartingActivity.flagControl.APP_SEARCHING_CONTROL == 1 && StartingActivity.flagControl.MUSIC_PLAYING_NOW == 1) {
+            FlagControl.APP_SEARCHING_CONTROL = 0;
+        } else if (FlagControl.APP_SEARCHING_CONTROL == 1 && FlagControl.MUSIC_PLAYING_NOW == 1) {
             Log.i("Testing:MUSIC_NOW", "현재음악재생중");
             stopService(intent2);
             playMusic(list.get(position));//일단 position실행
-            StartingActivity.flagControl.APP_SEARCHING_CONTROL = 0;
+            FlagControl.APP_SEARCHING_CONTROL = 0;
         }
     }
 
@@ -98,10 +102,13 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
             Log.i("Player",":::playMusic");
             //  seekBar.setProgress(0);
             title.setText(musicDto.getArtist() + " - " + musicDto.getTitle());
+            String temp = musicDto.getArtist() + " - " + musicDto.getTitle();
             playerUri = Uri.withAppendedPath(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + musicDto.getId());
            /* MusicService.SERVICE_PAUSE_FLAG = 0;
             this.PAUSE_CHECKING_FLAG = 0;*/
             Bitmap bitmap = BitmapFactory.decodeFile(getCoverArtPath(Long.parseLong(musicDto.getAlbumId()), getApplication()));
+            FlagControl.nowalbum=bitmap;
+            FlagControl.nowTitle= temp;
             album.setImageBitmap(bitmap);
             startService(intent2); // 서비스 시작
         } catch (Exception e) {
@@ -125,6 +132,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
         albumCursor.close();
         return result;
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -133,20 +141,20 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
                     play.setImageResource(R.drawable.play);
                     //일시정지 플래그 걸고
                     //MusicService.SERVICE_PAUSE_FLAG = 0;
-                    StartingActivity.flagControl.MUSIC_PAUSE = 0;
+                    FlagControl.MUSIC_PAUSE = 0;
                     startService(intent2);
                     play_flag = 1;
                 } else if (play_flag == 1) {
                     play.setImageResource(R.drawable.pause);
                     //MusicService.SERVICE_PAUSE_FLAG = 1;
-                    StartingActivity.flagControl.MUSIC_PAUSE=1;
+                    FlagControl.MUSIC_PAUSE=1;
                     startService(intent2);
                     play_flag = 0;
                 }
                 break;
             case R.id.pre:
-                MusicService.SERVICE_PAUSE_FLAG = 0;
-                this.PAUSE_CHECKING_FLAG = 0;
+                MusicService.SERVICE_PAUSE_FLAG = 0;/*
+                this.PAUSE_CHECKING_FLAG = 0;*/
                 stopService(intent2);
                 if (position - 1 >= 0) {
                     position--;
@@ -155,7 +163,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.next:
                 MusicService.SERVICE_PAUSE_FLAG = 0;
-                this.PAUSE_CHECKING_FLAG = 0;
+       /*         this.PAUSE_CHECKING_FLAG = 0;*/
                 stopService(intent2);
                 if (position + 1 < list.size()) {
                     position++;

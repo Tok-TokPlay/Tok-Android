@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.dkdk6.toktokplay.FlagControl;
 import com.example.dkdk6.toktokplay.R;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class SearchingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.searchactivity);
+        setContentView(R.layout.searching_activity);
         imageView = (ImageView) findViewById(R.id.imageView);
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(1000); //0.3초동안 진동
@@ -64,7 +63,6 @@ public class SearchingActivity extends AppCompatActivity {
                         beatarray.add(0);
                     }
                 }
-
                 @Override
                 public void onFinish() {
                     Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -79,7 +77,6 @@ public class SearchingActivity extends AppCompatActivity {
                     //searchingActivity로 넘어갈 것
                 }
             }.start();
-
         }
     }
 

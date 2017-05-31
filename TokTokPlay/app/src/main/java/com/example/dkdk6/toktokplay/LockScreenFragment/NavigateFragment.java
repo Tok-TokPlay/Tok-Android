@@ -14,7 +14,6 @@ import com.example.dkdk6.toktokplay.R;
  */
 
 public class NavigateFragment extends Fragment{
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

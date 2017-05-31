@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name = "android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_tok"
@@ -26,12 +28,13 @@
         <activity android:name=".Activity.LockScreenActivity"/>
         <service android:name=".Service_Receiver.ScreenService"/>
         <receiver android:name=".Service_Receiver.ScreenReceiver"/>
-        <activity android:name=".Activity.MusicActivity"/>
+
         <activity android:name=".Activity.SearchingActivity"/>
         <activity android:name=".Activity.MusicPlayerActivity"/>
         <activity android:name=".Activity.MusicListActivity"/>
         <activity android:name=".Activity.WaitingResultActivity"/>
         <activity android:name=".Activity.youtubeTesting"/>
+        <activity android:name=".Activity.HowToActivity"/>
     </application>
 
     <receiver

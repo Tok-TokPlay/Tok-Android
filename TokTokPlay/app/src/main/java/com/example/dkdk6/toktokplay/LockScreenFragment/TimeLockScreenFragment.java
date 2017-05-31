@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Handler;
 
@@ -25,15 +26,16 @@ public class TimeLockScreenFragment extends Fragment {
     private Handler handler;
     private int touchCount = 0;
     private static final int TIMER_TICK_ID = 0;
-
+    private ImageView mainImage;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.timefragment, container, false);
+        mainImage = (ImageView)view.findViewById(R.id.titleView);
         timeValueDate = (TextView) view.findViewById(R.id.timeFragmenDate);
         timeValueTime = (TextView) view.findViewById(R.id.timeFragmentTime);
         timeValueA = (TextView) view.findViewById(R.id.timeFragmentTimeA);
-        view.setOnClickListener(new View.OnClickListener() {
+        mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 touchCount++;
