@@ -35,12 +35,13 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
     private ImageView album, previous, play, pause, next;
     private int play_flag = 0;
     private ContentResolver res;
-    public static int position; //        stopService(intent2);
+    public static int position = 0; //        stopService(intent2);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music);
+        Log.i("Testing_Player",""+FlagControl.MUSIC_PLAYING_NOW);
         Intent intent = getIntent();
         /*
         초기화 할 부분
@@ -48,6 +49,29 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
         title = (TextView) findViewById(R.id.title);
         album = (ImageView) findViewById(R.id.album);
         position = intent.getIntExtra("position", 0);
+        FlagControl.NOW_MUSIC_POSITION = position;
+/*        if (FlagControl.APP_DWON == 1) {
+            position=FlagControl.NOW_MUSIC_POSITION;
+            Log.i("STOP??","z");
+            list = new ArrayList<>();
+            //가져오고 싶은 컬럼 명을 나열합니다. 음악의 아이디, 앰블럼 아이디, 제목, 아스티스트 정보를 가져옵니다.
+            String[] projection = {MediaStore.Audio.Media._ID,
+                    MediaStore.Audio.Media.ALBUM_ID,
+                    MediaStore.Audio.Media.TITLE,
+                    MediaStore.Audio.Media.ARTIST
+            };
+            Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                    projection, null, null, null);
+            while (cursor.moveToNext()) {
+                MusicDto musicDto = new MusicDto();
+                musicDto.setId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
+                musicDto.setAlbumId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
+                musicDto.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
+                musicDto.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
+                list.add(musicDto);
+            }
+            cursor.close();
+        }*/
         list = (ArrayList<MusicDto>) intent.getSerializableExtra("playlist");
         res = getContentResolver();
         previous = (ImageView) findViewById(R.id.pre);
@@ -57,7 +81,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
         previous.setOnClickListener(this);
         play.setOnClickListener(this);
         next.setOnClickListener(this);
-        if(FlagControl.NOTIFICATION_OPEN==1&&FlagControl.MUSIC_PLAYING_NOW==1){
+        if (FlagControl.NOTIFICATION_OPEN == 1 && FlagControl.MUSIC_PLAYING_NOW == 1) {
             album.setImageBitmap(FlagControl.nowalbum);
             title.setText(FlagControl.nowTitle);
         }
@@ -99,7 +123,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
 
     public void playMusic(MusicDto musicDto) {
         try {
-            Log.i("Player",":::playMusic");
+            Log.i("Player", ":::playMusic");
             //  seekBar.setProgress(0);
             title.setText(musicDto.getArtist() + " - " + musicDto.getTitle());
             String temp = musicDto.getArtist() + " - " + musicDto.getTitle();
@@ -107,8 +131,8 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
            /* MusicService.SERVICE_PAUSE_FLAG = 0;
             this.PAUSE_CHECKING_FLAG = 0;*/
             Bitmap bitmap = BitmapFactory.decodeFile(getCoverArtPath(Long.parseLong(musicDto.getAlbumId()), getApplication()));
-            FlagControl.nowalbum=bitmap;
-            FlagControl.nowTitle= temp;
+            FlagControl.nowalbum = bitmap;
+            FlagControl.nowTitle = temp;
             album.setImageBitmap(bitmap);
             startService(intent2); // 서비스 시작
         } catch (Exception e) {
@@ -139,15 +163,13 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
             case R.id.start_music:
                 if (play_flag == 0) { //곡이 재생되는 경우 -> 즉 일시정지가 수행되어야 하는 경우임
                     play.setImageResource(R.drawable.play);
-                    //일시정지 플래그 걸고
-                    //MusicService.SERVICE_PAUSE_FLAG = 0;
                     FlagControl.MUSIC_PAUSE = 0;
                     startService(intent2);
                     play_flag = 1;
                 } else if (play_flag == 1) {
                     play.setImageResource(R.drawable.pause);
                     //MusicService.SERVICE_PAUSE_FLAG = 1;
-                    FlagControl.MUSIC_PAUSE=1;
+                    FlagControl.MUSIC_PAUSE = 1;
                     startService(intent2);
                     play_flag = 0;
                 }
@@ -172,5 +194,9 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
                 break;
         }
     }
-
+    public void onStop(){
+        super.onStop();
+        FlagControl.APP_DWON=1;
+        Log.i("STOP",""+FlagControl.APP_DWON);
+    }
 }

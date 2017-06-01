@@ -1,6 +1,7 @@
 package com.example.dkdk6.toktokplay.Activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,19 +27,25 @@ public class StartingActivity extends AppCompatActivity {
     private ImageButton onBtn, offBtn, startMusic, goToSearching;
     private static String TAG = "PermissionDemo";
     private static final int REQUEST_CODE = 101;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.starting_activity);
         int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        if(FlagControl.APP_DWON!=0){
+            FlagControl.APP_DWON=0;
+        }
+        Log.i("OPEN",""+FlagControl.APP_DWON);
+       // getPreferences();
         if (permission != PackageManager.PERMISSION_GRANTED) {
             makeRequest();
         }
-        titleView = (ImageView)findViewById(R.id.title_starting);
+        titleView = (ImageView) findViewById(R.id.imageView2_title);
         titleView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartingActivity.this,HowToActivity.class);
+                Intent intent = new Intent(StartingActivity.this, HowToActivity.class);
                 startActivity(intent);
             }
         });
@@ -78,6 +85,7 @@ public class StartingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FlagControl.ON_PLAY_LIST = 1;
+                FlagControl.APP_SEARCHING_CONTROL = 2;
                 Intent intent = new Intent(StartingActivity.this, MusicListActivity.class);
                 startActivity(intent);
             }
@@ -102,7 +110,5 @@ public class StartingActivity extends AppCompatActivity {
             }
         }
     }
-
-
 
 }

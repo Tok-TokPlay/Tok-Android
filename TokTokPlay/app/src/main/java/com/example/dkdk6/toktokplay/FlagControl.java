@@ -21,6 +21,7 @@ public class FlagControl {
     public static int MUSIC_PAUSE=0;
     public static int NOTIFICATION_OPEN=0;
     public static int NOW_MUSIC_POSITION=-1;
+    public static int APP_DWON=0;
     public static Bitmap nowalbum;
     public static String nowTitle;
     public static String receiveTitle = "I LOVE YOU";

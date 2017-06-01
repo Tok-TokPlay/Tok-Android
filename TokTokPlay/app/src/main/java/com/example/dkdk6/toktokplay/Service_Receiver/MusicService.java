@@ -47,6 +47,7 @@ public class MusicService extends Service {
             //노래재생
         } else if (FlagControl.MUSIC_PLAYING_NOW==1||FlagControl.MUSIC_PAUSE==0) {
             Log.i("Pause", "노래 정지");
+            FlagControl.MUSIC_PLAYING_NOW=0;
             musicObject.pause();
         }
     }

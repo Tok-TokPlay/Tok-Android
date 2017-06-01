@@ -22,6 +22,7 @@ public class NavigateFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        FlagControl.APP_SEARCHING_CONTROL=0;
         View view = inflater.inflate(R.layout.navigatefragment,container,false);
         return view;
     }
