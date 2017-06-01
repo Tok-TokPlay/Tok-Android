@@ -68,7 +68,7 @@ public class StartingActivity extends AppCompatActivity {
         goToSearching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FlagControl.APP_SEARCHING_CONTROL = 0;
+                FlagControl.APP_SEARCHING_CONTROL = 1;
                 Log.i("Searching위치확인 Log", "" + FlagControl.APP_SEARCHING_CONTROL);
                 Intent intent = new Intent(StartingActivity.this, SearchingActivity.class);
                 startActivity(intent);

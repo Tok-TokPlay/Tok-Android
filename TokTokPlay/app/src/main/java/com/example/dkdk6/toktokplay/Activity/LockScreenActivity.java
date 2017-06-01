@@ -18,7 +18,6 @@ public class LockScreenActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lockscreenactivity);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-        FlagControl.APP_SEARCHING_CONTROL=1;
         viewPager = (ViewPager)findViewById(R.id.view_pager);
         adapter = new LockScreenFragmentPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);

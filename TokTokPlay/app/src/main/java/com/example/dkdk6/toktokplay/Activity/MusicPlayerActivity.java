@@ -85,11 +85,11 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
             playMusic(list.get(position));//일단 position실행
             FlagControl.ON_PLAY_LIST = 0;
         }
-        if (FlagControl.APP_SEARCHING_CONTROL == 1 && FlagControl.MUSIC_PLAYING_NOW == 0) {
+        if (FlagControl.APP_SEARCHING_CONTROL == 0 && FlagControl.MUSIC_PLAYING_NOW == 0) {
             Log.i("Testing:MUSIC_NOW", "현재음악안재생중");
             playMusic(list.get(position));//일단 position실행
             FlagControl.APP_SEARCHING_CONTROL = 0;
-        } else if (FlagControl.APP_SEARCHING_CONTROL == 1 && FlagControl.MUSIC_PLAYING_NOW == 1) {
+        } else if (FlagControl.APP_SEARCHING_CONTROL == 0 && FlagControl.MUSIC_PLAYING_NOW == 1) {
             Log.i("Testing:MUSIC_NOW", "현재음악재생중");
             stopService(intent2);
             playMusic(list.get(position));//일단 position실행

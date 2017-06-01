@@ -23,5 +23,7 @@ public class FlagControl {
     public static int NOW_MUSIC_POSITION=-1;
     public static Bitmap nowalbum;
     public static String nowTitle;
+    public static String receiveTitle = "I LOVE YOU";
+    public static String receveArtist = "2NE1";
     public static String musicKey;
 }

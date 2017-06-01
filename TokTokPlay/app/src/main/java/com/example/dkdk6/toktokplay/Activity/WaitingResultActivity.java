@@ -24,42 +24,48 @@ import java.util.ArrayList;
  */
 public class WaitingResultActivity extends AppCompatActivity {
     private ImageView image;
+
     int set = 0;
     private View view;
     private ArrayList<Integer> beatarray = new ArrayList<Integer>();
-    String[] searchResultTitle = {"I LOVE YOU", "Let It Go", "서쪽 하늘"};
-    String[] searchResultArtist = {"2NE1", "Idina Menzel", "울랄라 세션"};
-    String tempResult_T,tempResult_A;
-    public static Activity WaitingActivity;
+    /*    String[] searchResultTitle = {"I LOVE YOU", "Let It Go", "서쪽 하늘"};
+        String[] searchResultArtist = {"2NE1", "Idina Menzel", "울랄라 세션"};*/
+    String tempResult_T, tempResult_A;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_waiting_layout);
         Intent intent = getIntent();
-        beatarray=intent.getIntegerArrayListExtra("arrayList");
-        WaitingActivity = WaitingResultActivity.this;
+        beatarray = intent.getIntegerArrayListExtra("arrayList");
         image = (ImageView) findViewById(R.id.title_image);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotateanim);
         image.setAnimation(animation);
-        ClientConnect cc = new ClientConnect("165.194.17.109",beatarray);//////
-        if(!FlagControl.musicKey.equals("")){
-            Log.i("ReceiveMusicKey",FlagControl.musicKey);
-            tempResult_T = searchResultTitle[Integer.parseInt(FlagControl.musicKey)];
-            tempResult_A = searchResultArtist[Integer.parseInt(FlagControl.musicKey)];
-        }
+        //진희테스트용
+       // ClientConnect cc = new ClientConnect("165.194.17.11", beatarray);//////
+    /*    if (!FlagControl.musicKey.equals(null)) {
+            Log.i("ReceiveMusicKey", FlagControl.musicKey);
+            tempResult_T = FlagControl.receiveTitle;
+            tempResult_A = FlagControl.receveArtist;
+        }*/
         //받은 다음 재상이 디비에 String정보를 다시 받아서 (Static 변수로) Intent Gogo
-
+        //도경테스트용
         //여기에 가수, 곡명 받아와짐
-        if (FlagControl.APP_SEARCHING_CONTROL == 0) {
+        tempResult_T = FlagControl.receiveTitle;
+        tempResult_A = FlagControl.receveArtist;
+        Log.d("RKEY",tempResult_A);
+        Log.d("RKEY!",""+FlagControl.APP_SEARCHING_CONTROL);
+        if (FlagControl.APP_SEARCHING_CONTROL == 1) {
+            Log.d("여기",tempResult_A);
             //APP 검색 한 경우
             Intent PlaymusicIntent = new Intent(WaitingResultActivity.this, youtubeTesting.class);
-
             startActivity(PlaymusicIntent);
             finish();
-        } else if (FlagControl.APP_SEARCHING_CONTROL == 1) {
+        } else if (FlagControl.APP_SEARCHING_CONTROL == 0) {
             //잠금화면에서 검색을 한 경우
+            Log.d("RKEY",tempResult_A);
             Intent PlaymusicIntent = new Intent(WaitingResultActivity.this, MusicListActivity.class);
-            PlaymusicIntent.putExtra("RKey_T",tempResult_T);
-            PlaymusicIntent.putExtra("RKey_A",tempResult_A);
+            PlaymusicIntent.putExtra("RKey_T", tempResult_T);
+            PlaymusicIntent.putExtra("RKey_A", tempResult_A);
             startActivity(PlaymusicIntent);
             finish();
         }
