@@ -47,7 +47,7 @@ public class SearchingActivity extends AppCompatActivity {
 
     protected void receiveBeat() {
         if (timerStart == true) {
-            mCountDown = new CountDownTimer(1000, 10) {//1초 1000->10000
+            mCountDown = new CountDownTimer(10000, 10) {//1초 1000->10000
                 @Override
                 public void onTick(long l) {
                     imageView.setOnClickListener(new View.OnClickListener() {
@@ -83,9 +83,10 @@ public class SearchingActivity extends AppCompatActivity {
     protected void sendToServer(ArrayList<Integer> rBeatArray) {
         //서버로 비트 전송//
         /*
-        진희언니 작업 여기서 하면 되요!
+        진희언니 처음 작업 여기서 하면 되요! 다음으로 WatingActivity가서 결과 기다리다가 결과를 받을 액티비티는 MusicListActivity입니다!
          */
         Intent PlaymusicIntent = new Intent(SearchingActivity.this, WaitingResultActivity.class);
+        PlaymusicIntent.putIntegerArrayListExtra("arrayList",rBeatArray);
         startActivity(PlaymusicIntent);
         finish();
     }

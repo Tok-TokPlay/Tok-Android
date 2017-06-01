@@ -30,11 +30,15 @@ public class MusicListActivity extends AppCompatActivity {
     public static ArrayList<MusicDto> list;
     private static String TAG = "PermissionDemo";
     private static final int REQUEST_CODE = 101;
-
+    private String receiveTitle, receiveArtist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musiclist);
+        Intent rintent = getIntent();
+        receiveTitle=rintent.getStringExtra("RKey_T");
+        receiveArtist= rintent.getStringExtra("RKey_A");
+        Log.i("진희가테스트하라고시킨내용",receiveTitle+"AA"+receiveArtist);
         intent2 = new Intent(getApplicationContext(), MusicService.class); // 이동할 컴포넌트
         if (FlagControl.APP_SEARCHING_CONTROL == 1) {
             //검색 결과 바로 재생인 경우
@@ -127,9 +131,12 @@ public class MusicListActivity extends AppCompatActivity {
             };
             Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                     projection, null, null, null);
+            /*
+            진희언니 여기 이 밑에 While문 안에 두번째 if문에서 searchResultTitle이랑 ArtistTitle에 언니가 보내준값이 들어와야되!
+             */
             while (cursor.moveToNext()) {
                 if (count < searchResultTitle.length) {
-                    if ((cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)).equals(searchResultTitle[count])) && (cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)).equals(searchResultArtist[count]))) {
+                    if ((cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)).equals(receiveTitle)) && (cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)).equals(receiveArtist))) {
                         count++;
                         MusicDto musicDto = new MusicDto();
                         musicDto.setId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));

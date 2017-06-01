@@ -23,5 +23,5 @@ public class FlagControl {
     public static int NOW_MUSIC_POSITION=-1;
     public static Bitmap nowalbum;
     public static String nowTitle;
-
+    public static String musicKey;
 }
