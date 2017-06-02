@@ -21,19 +21,6 @@ import com.google.android.youtube.player.YouTubeIntents;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import com.examples.youtubeapidemo.adapter.DemoArrayAdapter;
-import com.examples.youtubeapidemo.adapter.DemoListViewItem;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A sample activity which shows how to use the {@link YouTubeIntents} static methods to create
@@ -41,29 +28,12 @@ import java.util.List;
  */
 public final class IntentsDemoActivity extends Activity{
 
-  // This is the value of Intent.EXTRA_LOCAL_ONLY for API level 11 and above.
-  //private static final String EXTRA_LOCAL_ONLY = "android.intent.extra.LOCAL_ONLY";
- // private static final String VIDEO_ID = "-Uwjt32NvVA";
-  //private static final String PLAYLIST_ID = "PLF3DFB800F05F551A";
   private String SONG_ID = "Lonely";
-  //private static final String CHANNEL_ID = "UCVHFbqXqoYvEWM1Ddxl0QDg";
-  private static final int SELECT_VIDEO_REQUEST = 1000;
-
-  private List<DemoListViewItem> intentItems;
-
   Intent intent2 = new Intent();
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.intents_demo);
-    final EditText et = (EditText) findViewById(R.id.musicTitle);
-    Button search = (Button) findViewById(R.id.searchBtn);
-    search.setOnClickListener(new View.OnClickListener() {
-      public void onClick(View v) {
-        SONG_ID = et.getText().toString();
         intent2 = YouTubeIntents.createSearchIntent(IntentsDemoActivity.this, SONG_ID);
         startActivity(intent2);
       }
-    });
-  }
 
 }
