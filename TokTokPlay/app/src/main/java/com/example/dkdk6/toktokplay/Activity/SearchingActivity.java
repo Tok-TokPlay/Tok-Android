@@ -47,7 +47,7 @@ public class SearchingActivity extends AppCompatActivity {
 
     protected void receiveBeat() {
         if (timerStart == true) {
-            mCountDown = new CountDownTimer(1000, 10) {//1초 1000->10000
+            mCountDown = new CountDownTimer(10000, 50) {//1초 1000->10000
                 @Override
                 public void onTick(long l) {
                     imageView.setOnClickListener(new View.OnClickListener() {
