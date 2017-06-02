@@ -1,7 +1,6 @@
 package com.example.dkdk6.toktokplay.Activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,6 +21,7 @@ import com.example.dkdk6.toktokplay.R;
 import com.example.dkdk6.toktokplay.Service_Receiver.ScreenService;
 
 public class StartingActivity extends AppCompatActivity {
+
     private Context mContext = this;
     private ImageView titleView;
     private ImageButton onBtn, offBtn, startMusic, goToSearching;
@@ -33,19 +33,14 @@ public class StartingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.starting_activity);
         int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        if(FlagControl.APP_DWON!=0){
-            FlagControl.APP_DWON=0;
-        }
-        Log.i("OPEN",""+FlagControl.APP_DWON);
-       // getPreferences();
         if (permission != PackageManager.PERMISSION_GRANTED) {
             makeRequest();
         }
-        titleView = (ImageView) findViewById(R.id.imageView2_title);
+        titleView = (ImageView)findViewById(R.id.imageView2_title);
         titleView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartingActivity.this, HowToActivity.class);
+                Intent intent = new Intent(StartingActivity.this,HowToActivity.class);
                 startActivity(intent);
             }
         });
@@ -85,7 +80,7 @@ public class StartingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FlagControl.ON_PLAY_LIST = 1;
-                FlagControl.APP_SEARCHING_CONTROL = 2;
+                Log.i("Testing:Starting","g");
                 Intent intent = new Intent(StartingActivity.this, MusicListActivity.class);
                 startActivity(intent);
             }
@@ -95,7 +90,6 @@ public class StartingActivity extends AppCompatActivity {
     protected void makeRequest() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -110,5 +104,4 @@ public class StartingActivity extends AppCompatActivity {
             }
         }
     }
-
 }

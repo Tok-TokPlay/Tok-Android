@@ -36,14 +36,14 @@
 
         <ImageView
             android:id="@+id/imageView2_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="150dp"
+            android:layout_marginLeft="30dp"
             android:background="@null"
-            android:layout_marginLeft="20dp"
             android:scaleType="fitStart"
-            android:src="@drawable/startactivity_background_findimage"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"/>
+            android:src="@drawable/startactivity_background_topmain"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
         <View
             android:id="@+id/view2"

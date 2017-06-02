@@ -35,15 +35,17 @@ public class MusicListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musiclist);
-        Log.i("Testing_List",""+FlagControl.MUSIC_PLAYING_NOW);
-        Intent rintent = getIntent();
-        receiveTitle=rintent.getStringExtra("RKey_T");
-        receiveArtist= rintent.getStringExtra("RKey_A");
-       /* if(FlagControl.APP_DWON!=0){
-            FlagControl.APP_DWON=0;
-        }*/
-        intent2 = new Intent(getApplicationContext(), MusicService.class); // 이동할 컴포넌트
-        if (FlagControl.APP_SEARCHING_CONTROL == 0) {
+        Log.i("Testing2:Starting","g");
+        if(FlagControl.ON_PLAY_LIST!=1){ //검색으로 온 경우만 이 과정 진행해야 한다.
+            Intent rintent = getIntent();
+            receiveTitle=rintent.getStringExtra("RKey_T");
+            receiveArtist= rintent.getStringExtra("RKey_A");
+            Log.i("진희가테스트하라고시킨내용",";"+receiveTitle+"AA"+receiveArtist);
+        }
+
+        intent2 = new Intent(getApplicationContext(), MusicService.class);
+        if (FlagControl.APP_SEARCHING_CONTROL == 0&&FlagControl.ON_PLAY_LIST==0){
+            Log.i("Testing3:Starting","g");
             //검색 결과 바로 재생인 경우
             Log.i("Tesing: DirectPlaying", "Checking");
             int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -51,11 +53,11 @@ public class MusicListActivity extends AppCompatActivity {
                 makeRequest();
             }
             getMusicList(); // 디바이스 안에 있는 mp3 파일 리스트를 조회하여 LIst를 만듭니다.
-            if (FlagControl.MUSIC_PLAYING_NOW != 0) {      //현재 음악 정지
+          /*  if (FlagControl.MUSIC_PLAYING_NOW != 0) {      //현재 음악 정지
                 Log.i("현재 음악", "재생 중 이여서 끄고 다시 시작");
                 stopService(intent2);
-            }
-            /*MusicPlayerActivity.PAUSE_CHECKING_FLAG = 0;*/
+            }*/
+            stopService(intent2);
             makeNotification();
             /*검색결과를 받아서 putExtra에서 List목록 중 찾아서 position에 넣어주면되요*/
             Intent intent = new Intent(MusicListActivity.this, MusicPlayerActivity.class);
@@ -63,8 +65,9 @@ public class MusicListActivity extends AppCompatActivity {
             intent.putExtra("playlist", list);
             startActivity(intent);
             finish();
-        } else if (FlagControl.ON_PLAY_LIST == 1) { //앱으로 검색해서 List를 보여줘야 하는 경우라면?
-            Log.i("ListTest","1");
+        }else if(FlagControl.ON_PLAY_LIST == 1){ //앱으로 검색해서 List를 보여줘야 하는 경우라면?
+            Log.i("Testing4:Starting","g");
+            Log.i("Testing1","MusicList");
             int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
             if (permission != PackageManager.PERMISSION_GRANTED) {
                 makeRequest();
@@ -76,10 +79,11 @@ public class MusicListActivity extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    /*stopService(intent2);*/
-                 /*   MusicPlayerActivity.PAUSE_CHECKING_FLAG = 0;*/
+                    stopService(intent2);
+           /*         MusicPlayerActivity.PAUSE_CHECKING_FLAG = 0;*/
                     Intent intent = new Intent(MusicListActivity.this, MusicPlayerActivity.class);
                     makeNotification();
+                    Log.i("Testing7.position",""+position);
                     intent.putExtra("position", position);
                     intent.putExtra("playlist", list);
                     startActivity(intent);
@@ -122,14 +126,11 @@ public class MusicListActivity extends AppCompatActivity {
     }
 
     public void getMusicList() {
-        if (FlagControl.APP_SEARCHING_CONTROL == 0) {
-            Log.i("ListNoting","1");
+        if (FlagControl.APP_SEARCHING_CONTROL == 0&&FlagControl.ON_PLAY_LIST==0) {
             int count = 0;
             list = new ArrayList<>();
             String[] searchResultTitle = {"I LOVE YOU", "Let It Go", "서쪽 하늘"};
             String[] searchResultArtist = {"2NE1", "Idina Menzel", "울랄라 세션"};
- /*           Log.d("getMusic::",receiveTitle);
-            Log.d("getMusic3::",receiveArtist);*/
             //가져오고 싶은 컬럼 명을 나열합니다. 음악의 아이디, 앰블럼 아이디, 제목, 아스티스트 정보를 가져옵니다.
             String[] projection = {MediaStore.Audio.Media._ID,
                     MediaStore.Audio.Media.ALBUM_ID,
@@ -156,8 +157,7 @@ public class MusicListActivity extends AppCompatActivity {
                 }
             }
             cursor.close();
-        } else if (FlagControl.ON_PLAY_LIST == 1) {
-            Log.i("ListTest","2");
+        } else{
             int count = 0;
             list = new ArrayList<>();
             //가져오고 싶은 컬럼 명을 나열합니다. 음악의 아이디, 앰블럼 아이디, 제목, 아스티스트 정보를 가져옵니다.

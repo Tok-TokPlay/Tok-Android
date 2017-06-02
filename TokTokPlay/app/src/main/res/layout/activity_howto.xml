@@ -9,5 +9,5 @@
         android:layout_height="match_parent"
         android:background="@null"
         android:scaleType="fitStart"
-        android:src="@drawable/startactivity_howto"/>
+        android:src="@drawable/startactivity_howto2"/>
 </LinearLayout>

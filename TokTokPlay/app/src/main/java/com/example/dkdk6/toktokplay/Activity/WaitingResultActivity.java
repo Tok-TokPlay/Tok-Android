@@ -41,8 +41,8 @@ public class WaitingResultActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotateanim);
         image.setAnimation(animation);
         //진희테스트용
-/*        ClientConnect cc = new ClientConnect("165.194.17.11", beatarray);//////
-        if (!FlagControl.musicKey.equals(null)) {
+       // ClientConnect cc = new ClientConnect("165.194.17.11", beatarray);//////
+    /*    if (!FlagControl.musicKey.equals(null)) {
             Log.i("ReceiveMusicKey", FlagControl.musicKey);
             tempResult_T = FlagControl.receiveTitle;
             tempResult_A = FlagControl.receveArtist;
@@ -52,7 +52,7 @@ public class WaitingResultActivity extends AppCompatActivity {
         //여기에 가수, 곡명 받아와짐
         tempResult_T = FlagControl.receiveTitle;
         tempResult_A = FlagControl.receveArtist;
-    /*    Log.d("RKEY",tempResult_A);*/
+        Log.d("RKEY",tempResult_A);
         Log.d("RKEY!",""+FlagControl.APP_SEARCHING_CONTROL);
         if (FlagControl.APP_SEARCHING_CONTROL == 1) {
             Log.d("여기",tempResult_A);
