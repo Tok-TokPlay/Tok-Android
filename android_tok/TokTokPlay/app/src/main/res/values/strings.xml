@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TokTokPlay</string>
+    <string name="minVersion"></string>
+    <string name="isLaunchableActivity"></string>
+</resources>

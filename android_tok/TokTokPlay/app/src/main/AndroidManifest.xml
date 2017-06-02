@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.dkdk6.toktokplay">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name = "android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_tok"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_tok"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+        <activity android:name=".Activity.StartingActivity">
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data android:name="@string/minVersion" android:value="8"/>
+            <meta-data android:name="@string/isLaunchableActivity" android:value="true"/>
+        </activity>
+        <service android:name=".Service_Receiver.MusicService"></service>
+        <activity android:name=".Activity.LockScreenActivity"/>
+        <service android:name=".Service_Receiver.ScreenService"/>
+        <receiver android:name=".Service_Receiver.ScreenReceiver"/>
+
+        <activity android:name=".Activity.SearchingActivity"/>
+        <activity android:name=".Activity.MusicPlayerActivity"/>
+        <activity android:name=".Activity.MusicListActivity"/>
+        <activity android:name=".Activity.WaitingResultActivity"/>
+        <activity android:name=".Activity.youtubeTesting"/>
+        <activity android:name=".Activity.HowToActivity"/>
+    </application>
+
+    <receiver
+        android:name=".BootReceiver"
+        android:enabled="true"
+        android:exported="false" >
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+        </intent-filter>
+    </receiver>
+    <receiver android:name=".PackageReceiver">
+        <intent-filter>
+            <action android:name="android.intent.action.PACKAGE_ADDED"/>
+            <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+            <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+            <data android:scheme="package"/>
+        </intent-filter>
+    </receiver>
+</manifest>
