@@ -61,14 +61,16 @@
 
         <ImageButton
             android:id="@+id/onBtn"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/selector"
             android:scaleType="fitStart"
             android:src="@drawable/startactivity_background_onbutton"
             android:layout_alignTop="@+id/view4"
             android:layout_toStartOf="@+id/view4"
-            android:layout_marginRight="50dp"/>
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            />
 
         <View
             android:id="@+id/view4"
@@ -80,12 +82,13 @@
 
         <ImageButton
             android:id="@+id/offBtn"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/selector"
             android:scaleType="fitStart"
             android:src="@drawable/startactivity_background_offbutton"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_alignTop="@+id/view4"
             android:layout_toEndOf="@+id/view4" />
 
@@ -139,11 +142,12 @@
 
         <ImageButton
             android:id="@+id/searching_direct"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="145dp"
             android:layout_toStartOf="@+id/view6"
-            android:layout_marginRight="50dp"
-            android:background="@android:color/transparent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/selector"
             android:scaleType="fitStart"
             android:src="@drawable/startingactivity_searching_icon"
             android:layout_below="@+id/last1"
@@ -171,11 +175,12 @@
 
         <ImageButton
             android:id="@+id/playMusic_direct"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@null"
+            android:background="@drawable/selector"
             android:layout_toEndOf="@+id/view6"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_below="@+id/last2"
             android:scaleType="fitStart"
             android:src="@drawable/startingactivity_playing_icon"
