@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 
 public class FlagControl {
+    public static int LOCK_ON=0;
     public static int APP_SEARCHING_CONTROL=-1;
     public static int MUSIC_PLAYING_NOW=0;
     public static int ON_PLAY_LIST=0;

@@ -22,7 +22,7 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-        <activity android:name=".Activity.StartingActivity">
+        <activity android:name=".Activity.LoadingActivity">
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -34,7 +34,7 @@
         <activity android:name=".Activity.LockScreenActivity"/>
         <service android:name=".Service_Receiver.ScreenService"/>
         <receiver android:name=".Service_Receiver.ScreenReceiver"/>
-
+        <activity android:name=".Activity.StartingActivity"/>
         <activity android:name=".Activity.SearchingActivity"/>
         <activity android:name=".Activity.MusicPlayerActivity"/>
         <activity android:name=".Activity.MusicListActivity"/>

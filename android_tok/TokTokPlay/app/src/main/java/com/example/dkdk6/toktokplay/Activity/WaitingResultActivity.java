@@ -38,6 +38,14 @@ public class WaitingResultActivity extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.title_image);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotateanim);
         image.setAnimation(animation);
+        android.os.Handler mHandler = new android.os.Handler();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }, (3 * 1000));
+
         //진희테스트용
        // ClientConnect cc = new ClientConnect("165.194.17.11", beatarray);//////
     /*    if (!FlagControl.musicKey.equals(null)) {

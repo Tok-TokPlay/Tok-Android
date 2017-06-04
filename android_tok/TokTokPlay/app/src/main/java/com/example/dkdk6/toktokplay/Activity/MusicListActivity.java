@@ -145,7 +145,6 @@ public class MusicListActivity extends AppCompatActivity {
             while (cursor.moveToNext()) {
                 if (count < searchResultTitle.length) {
                     if ((cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)).equals(receiveTitle)) && (cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)).equals(receiveArtist))) {
-                       Log.i("AA","여기");
                         count++;
                         MusicDto musicDto = new MusicDto();
                         musicDto.setId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
