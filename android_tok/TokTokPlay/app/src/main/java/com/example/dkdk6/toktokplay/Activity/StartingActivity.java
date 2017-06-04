@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.FloatProperty;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -19,11 +18,8 @@ import com.example.dkdk6.toktokplay.FlagControl;
 import com.example.dkdk6.toktokplay.R;
 import com.example.dkdk6.toktokplay.Service_Receiver.ScreenService;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 
 public class StartingActivity extends AppCompatActivity {
     private Context mContext = this;
