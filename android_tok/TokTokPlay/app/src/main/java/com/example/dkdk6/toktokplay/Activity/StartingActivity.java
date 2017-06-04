@@ -58,6 +58,9 @@ public class StartingActivity extends AppCompatActivity {
         }else if(FlagControl.LOCK_ON==0){
             onBtn.setImageResource(R.drawable.startactivity_background_onbutton);
             offBtn.setImageResource(R.drawable.startactivity_background_offbutton2);
+        }else{
+            onBtn.setImageResource(R.drawable.startactivity_background_onbutton);
+            offBtn.setImageResource(R.drawable.startactivity_background_offbutton2);
         }
         onBtn.setOnClickListener(new View.OnClickListener() {
             @Override
