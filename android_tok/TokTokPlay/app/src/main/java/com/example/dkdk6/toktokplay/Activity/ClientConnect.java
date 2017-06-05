@@ -21,7 +21,7 @@ class ClientConnect
     ArrayList<Integer> userBeat;
     Socket client = null;
     String ipAddress; //접속을 요청할 Server의 IP 주소를 저장할 변수
-    static final int port = 8888; //접속을 요청할 Server의 port 번호와 동일하게 지정
+    static final int port = 7000; //접속을 요청할 Server의 port 번호와 동일하게 지정
     BufferedReader read;
 
     //입력용 Stream
@@ -72,20 +72,20 @@ class ClientConnect
                     is = client.getInputStream();
                     ois = new ObjectInputStream(is);
                     Log.v("test3","22");
-
+//I LOVE YOU^^2NE1
                     //ObjectOutputStream.writeObject() 호출
                     receiveData = (String)ois.readObject(); //ObjectInputStream.readObject() 호출
                     System.out.println(client.getInetAddress()+"의 message ECHO: "+receiveData);
                     System.out.print("test "+"입력 →");
                     FlagControl.musicKey = receiveData;
-                    Log.d("test "+"Client.MusicKey",receiveData);
+                    Log.d("DB_Testing1_musickey",receiveData);
                     String[] words = receiveData.split("^^");
                     FlagControl.receiveTitle = words[0];
-                    FlagControl.receveArtist = words[1];
+                    FlagControl.receiveArtist = words[1];
+                    Log.d("DB_Testing1-2_musickey",FlagControl.receiveTitle);
                     for (String wo : words ){
                         System.out.println(wo);
                     }
-
                     os.close();
                     oos.close();
                     is.close();

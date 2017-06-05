@@ -16,5 +16,16 @@
         android:background="@android:color/transparent"
         android:scaleType="fitStart"
         android:src="@drawable/resultwation_icon2"
-       android:layout_centerInParent="true" />
+        android:layout_above="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitStart"
+        android:src="@drawable/result_waiting"
+        android:layout_marginBottom="59dp"
+        android:id="@+id/imageView2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/title_image" />
 </RelativeLayout>

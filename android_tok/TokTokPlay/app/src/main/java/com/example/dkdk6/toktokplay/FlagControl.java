@@ -21,10 +21,9 @@ public class FlagControl {
     public static int ON_PLAY_LIST=0;
     public static int MUSIC_PAUSE=0;
     public static int NOTIFICATION_OPEN=0;
-    public static int NOW_MUSIC_POSITION=-1;
     public static Bitmap nowalbum;
     public static String nowTitle;
     public static String receiveTitle = "I LOVE YOU";
-    public static String receveArtist = "2NE1";
+    public static String receiveArtist = "2NE1";
     public static String musicKey;
 }

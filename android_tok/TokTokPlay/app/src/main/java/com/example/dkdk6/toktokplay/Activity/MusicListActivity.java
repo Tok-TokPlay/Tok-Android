@@ -42,7 +42,6 @@ public class MusicListActivity extends AppCompatActivity {
             receiveArtist= rintent.getStringExtra("RKey_A");
             Log.i("진희가테스트하라고시킨내용",";"+receiveTitle+"AA"+receiveArtist);
         }
-
         intent2 = new Intent(getApplicationContext(), MusicService.class);
         if (FlagControl.APP_SEARCHING_CONTROL == 0&&FlagControl.ON_PLAY_LIST==0){
             Log.i("Testing3:Starting","g");
