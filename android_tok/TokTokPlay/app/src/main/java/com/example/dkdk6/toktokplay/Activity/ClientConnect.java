@@ -21,7 +21,7 @@ class ClientConnect
     ArrayList<Integer> userBeat;
     Socket client = null;
     String ipAddress; //접속을 요청할 Server의 IP 주소를 저장할 변수
-    static final int port = 7000; //접속을 요청할 Server의 port 번호와 동일하게 지정
+    static final int port = 7918; //접속을 요청할 Server의 port 번호와 동일하게 지정
     BufferedReader read;
 
     //입력용 Stream
@@ -79,7 +79,8 @@ class ClientConnect
                     System.out.print("test "+"입력 →");
                     FlagControl.musicKey = receiveData;
                     Log.d("DB_Testing1_musickey",receiveData);
-                    String[] words = receiveData.split("^^");
+                    String[] words = receiveData.split(":");
+                    Log.d("DB_Testing_musickey>>",words[0]);
                     FlagControl.receiveTitle = words[0];
                     FlagControl.receiveArtist = words[1];
                     Log.d("DB_Testing1-2_musickey",FlagControl.receiveTitle);
