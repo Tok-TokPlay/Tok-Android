@@ -4,18 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.dkdk6.toktokplay.R;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -51,7 +49,7 @@ public class SearchingActivity extends AppCompatActivity {
 
     protected void receiveBeat() {
         if (timerStart == true) {
-            mCountDown = new CountDownTimer(1000, 50) {//1초 1000->10000
+            mCountDown = new CountDownTimer(10000, 50) {//1초 1000->10000
                 @Override
                 public void onTick(long l) {
                     imageView.setOnClickListener(new View.OnClickListener() {
@@ -78,9 +76,10 @@ public class SearchingActivity extends AppCompatActivity {
                     for (int k = 0; k < beatarray.size(); k++) {
                         Log.d("beatarry > ", "" + beatarray.get(k));
                     }
+                    /*
                     // write on SD card file data in the text box
                     try {
-                        File myFile = new File("/sdcard/x.txt");
+                        File myFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),"1.txt");
                         myFile.createNewFile();
                         FileOutputStream fOut = new FileOutputStream(myFile);
                         OutputStreamWriter myOutWriter =
@@ -89,11 +88,19 @@ public class SearchingActivity extends AppCompatActivity {
                         myOutWriter.close();
                         fOut.close();
                         Toast.makeText(getBaseContext(),
-                                "Done writing SD 'x.txt'",
+                                "Done writing SD '1.txt'",
                                 Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         Toast.makeText(getBaseContext(), e.getMessage(),
                                 Toast.LENGTH_SHORT).show();
+                    }
+                    */
+                    try {
+                        Comparing comparing = new Comparing(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),beatarray.toString());
+                        Log.d("정답 : ",comparing.getMusicKey());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Log.d("정답 : ", "no");
                     }
                     //sendToServer(beatarray);
                     //searchingActivity로 넘어갈 것
