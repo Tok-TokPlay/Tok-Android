@@ -45,16 +45,11 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
         초기화 할 부분
          */
         int fake = intent.getIntExtra("Fakeposition", 0);
-
-        if(FlagControl.APP_SEARCHING_CONTROL==0){
-            FlagControl.APP_SEARCHING_CONTROL=-1;
-        }
   /*      if(FlagControl.ON_PLAY_LIST==1){
             FlagControl.ON_PLAY_LIST=0;
         }*/
         title = (TextView) findViewById(R.id.title);
         album = (ImageView) findViewById(R.id.album);
-
         position = intent.getIntExtra("position", 0);
         list = (ArrayList<MusicDto>) intent.getSerializableExtra("playlist");
         Log.i("MusicName2",list.get(position).getTitle());
@@ -62,7 +57,6 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
             FlagControl.FAKE=1;
             playMusic(list.get(position));
             Log.i("영운","몰라");
-
             Log.i("영운","몰라2");
             finish();
         }
@@ -83,6 +77,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void playingMethods(){
+        Log.i("MusicName3",list.get(position).getTitle());
         if (FlagControl.ON_PLAY_LIST == 1 && FlagControl.MUSIC_PLAYING_NOW == 0) {
             Log.i("Testing:리스트", "음악재생안되고있었음");
             playMusic(list.get(position));//일단 position실행
@@ -92,8 +87,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
             stopService(intent2);
             playMusic(list.get(position));//일단 position실행
     /*        FlagControl.ON_PLAY_LIST = 0;*/
-        }
-        if ((FlagControl.ON_PLAY_LIST==0&&FlagControl.APP_SEARCHING_CONTROL == 0) && FlagControl.MUSIC_PLAYING_NOW == 0) {
+        }else if ((FlagControl.ON_PLAY_LIST==0&&FlagControl.APP_SEARCHING_CONTROL == 0) && FlagControl.MUSIC_PLAYING_NOW == 0) {
             Log.i("Testing:MUSIC_NOW", "현재음악안재생중");
             playMusic(list.get(position));//일단 position실행
             FlagControl.APP_SEARCHING_CONTROL = 0;
@@ -102,6 +96,10 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
             stopService(intent2);
             playMusic(list.get(position));//일단 position실행
             FlagControl.APP_SEARCHING_CONTROL = 0;
+        }
+        Log.i("LogTesting",""+FlagControl.ON_PLAY_LIST+":"+FlagControl.APP_SEARCHING_CONTROL+":"+FlagControl.MUSIC_PLAYING_NOW);
+        if(FlagControl.APP_SEARCHING_CONTROL==0){
+            FlagControl.APP_SEARCHING_CONTROL=-1;
         }
     }
 

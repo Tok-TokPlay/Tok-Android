@@ -24,7 +24,7 @@ public class FlagControl {
     public static int NOTIFICATION_OPEN=0;
     public static Bitmap nowalbum;
     public static String nowTitle;
-    public static String receiveTitle = "I LOVE YOU";
-    public static String receiveArtist = "2NE1";
+    public static String receiveTitle = "I LUV IT";
+    public static String receiveArtist = "싸이 (Psy)";
     public static String musicKey;
 }

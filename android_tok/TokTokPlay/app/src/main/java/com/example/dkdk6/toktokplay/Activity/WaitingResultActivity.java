@@ -50,7 +50,7 @@ public class WaitingResultActivity extends AppCompatActivity {
                 //여기에 가수, 곡명 받아와짐
                 tempResult_T = FlagControl.receiveTitle;
                 tempResult_A = FlagControl.receiveArtist;
- /*               if (!FlagControl.musicKey.equals(null)) {
+               /* if (!FlagControl.musicKey.equals(null)) {
                     Log.d("DB_Testing3_waitAct", FlagControl.receiveTitle);
                     Log.d("DB_Testing3_waitAct", FlagControl.receiveArtist);
                     tempResult_T = FlagControl.receiveTitle;
@@ -65,6 +65,7 @@ public class WaitingResultActivity extends AppCompatActivity {
                     startActivity(PlaymusicIntent);
                     finish();
                 } else if (FlagControl.APP_SEARCHING_CONTROL == 0) {
+                    Log.i("LogTesting",""+FlagControl.APP_SEARCHING_CONTROL);
                     //잠금화면에서 검색을 한 경우
                     Log.d("RKEY",tempResult_A);
                     Intent PlaymusicIntent = new Intent(WaitingResultActivity.this, MusicListActivity.class);
@@ -74,6 +75,6 @@ public class WaitingResultActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        }, (2 * 1000)); //나중에바꿔
+        }, (1 * 1000)); //나중에바꿔
     }
 }
