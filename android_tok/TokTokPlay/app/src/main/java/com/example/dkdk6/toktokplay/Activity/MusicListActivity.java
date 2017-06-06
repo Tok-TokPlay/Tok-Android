@@ -36,7 +36,13 @@ public class MusicListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musiclist);
+        intent2 = new Intent(getApplicationContext(), MusicService.class);
         Log.i("Testing2:Starting", "g");
+        Intent rintent2 = getIntent();
+        int check = rintent2.getIntExtra("Starting",0);
+        if(check==10){
+            fakeStop();
+        }
         if (FlagControl.APP_SEARCHING_CONTROL == 0) { //검색으로 온 경우만 이 과정 진행해야 한다.
             Intent rintent = getIntent();
             receiveTitle = rintent.getStringExtra("RKey_T");
@@ -59,7 +65,6 @@ public class MusicListActivity extends AppCompatActivity {
                 stopService(intent2);
             }*/
             makeNotification();
-
             /*검색결과를 받아서 putExtra에서 List목록 중 찾아서 position에 넣어주면되요*/
             Intent intent = new Intent(MusicListActivity.this, MusicPlayerActivity.class);
             intent.putExtra("position", 0);
@@ -94,7 +99,32 @@ public class MusicListActivity extends AppCompatActivity {
             });
         }
     }
-
+    public void fakeStop(){
+        list = new ArrayList<>();
+        //가져오고 싶은 컬럼 명을 나열합니다. 음악의 아이디, 앰블럼 아이디, 제목, 아스티스트 정보를 가져옵니다.
+        String[] projection = {MediaStore.Audio.Media._ID,
+                MediaStore.Audio.Media.ALBUM_ID,
+                MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.ARTIST
+        };
+        Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                projection, null, null, null);
+        while (cursor.moveToNext()) {
+            MusicDto musicDto = new MusicDto();
+            musicDto.setId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
+            musicDto.setAlbumId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
+            musicDto.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
+            musicDto.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
+            list.add(musicDto);
+        }
+        cursor.close();
+        Intent intent = new Intent(MusicListActivity.this, MusicPlayerActivity.class);
+        intent.putExtra("Fakeposition", 10);
+        Log.i("MusicName",list.get(0).getTitle());
+        intent.putExtra("playlist", list);
+        startActivity(intent);
+        finish();
+    }
     public void makeNotification() {
         Log.i("Tesing:makeNotification", "->checking..");
         FlagControl.NOTIFICATION_OPEN = 1;
@@ -176,4 +206,15 @@ public class MusicListActivity extends AppCompatActivity {
             cursor.close();
         }
     }
+    @Override
+    public void onStop(){
+        super.onStop();
+        if(FlagControl.MUSIC_PLAYING_NOW==0||FlagControl.MUSIC_PAUSE==1){
+            StartingActivity.startPauseBtn.setImageResource(R.drawable.startactivity_background_top);
+        }
+        else{
+           StartingActivity.startPauseBtn.setImageResource(R.drawable.starting_stop);
+        }
+    }
+
 }

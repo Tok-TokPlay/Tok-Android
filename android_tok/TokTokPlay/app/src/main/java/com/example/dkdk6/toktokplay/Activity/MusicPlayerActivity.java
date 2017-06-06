@@ -44,6 +44,8 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
         /*
         초기화 할 부분
          */
+        int fake = intent.getIntExtra("Fakeposition", 0);
+
         if(FlagControl.APP_SEARCHING_CONTROL==0){
             FlagControl.APP_SEARCHING_CONTROL=-1;
         }
@@ -56,6 +58,14 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
         position = intent.getIntExtra("position", 0);
         list = (ArrayList<MusicDto>) intent.getSerializableExtra("playlist");
         Log.i("MusicName2",list.get(position).getTitle());
+        if(fake==10){
+            FlagControl.FAKE=1;
+            playMusic(list.get(position));
+            Log.i("영운","몰라");
+
+            Log.i("영운","몰라2");
+            finish();
+        }
         res = getContentResolver();
         previous = (ImageView) findViewById(R.id.pre);
         play = (ImageView) findViewById(R.id.start_music);
@@ -163,5 +173,15 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
                 break;
         }
     }
+    @Override
+    public void onStop(){
+        super.onStop();
+        if(FlagControl.MUSIC_PLAYING_NOW==0||FlagControl.MUSIC_PAUSE==1){
+            StartingActivity.startPauseBtn.setImageResource(R.drawable.startactivity_background_top);
+        }
+        else {
+            StartingActivity.startPauseBtn.setImageResource(R.drawable.starting_stop);
+        }
 
+    }
 }

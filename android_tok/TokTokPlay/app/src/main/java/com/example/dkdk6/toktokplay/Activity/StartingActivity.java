@@ -28,7 +28,7 @@ import java.io.PrintWriter;
 public class StartingActivity extends AppCompatActivity {
     private Context mContext = this;
     private ImageView titleView;
-    private ImageButton onBtn, offBtn, startMusic, goToSearching;
+    public static ImageButton startPauseBtn, onBtn, offBtn, startMusic, goToSearching;
     private static String TAG = "PermissionDemo";
     private static final int REQUEST_CODE = 101;
 
@@ -48,10 +48,23 @@ public class StartingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        startPauseBtn = (ImageButton) findViewById(R.id.imageView2_title_stop);
         onBtn = (ImageButton) findViewById(R.id.onBtn);
         offBtn = (ImageButton) findViewById(R.id.offBtn);
         startMusic = (ImageButton) findViewById(R.id.playMusic_direct);
         goToSearching = (ImageButton) findViewById(R.id.searching_direct);
+        if(FlagControl.MUSIC_PLAYING_NOW==0||FlagControl.MUSIC_PAUSE==1){
+            startPauseBtn.setImageResource(R.drawable.startactivity_background_top);
+        }
+        startPauseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StartingActivity.this, MusicListActivity.class);
+                intent.putExtra("Starting",10);
+                startActivity(intent);
+            }
+        });
+
         if(FlagControl.LOCK_ON==1){
             onBtn.setImageResource(R.drawable.startactivity_background_onbutton2);
             offBtn.setImageResource(R.drawable.startactivity_background_offbutton);

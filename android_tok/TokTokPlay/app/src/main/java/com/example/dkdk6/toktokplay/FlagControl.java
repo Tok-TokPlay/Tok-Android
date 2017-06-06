@@ -19,6 +19,7 @@ public class FlagControl {
     public static int APP_SEARCHING_CONTROL=-1;
     public static int MUSIC_PLAYING_NOW=0;
     public static int ON_PLAY_LIST=0;
+    public static int FAKE=0;
     public static int MUSIC_PAUSE=0;
     public static int NOTIFICATION_OPEN=0;
     public static Bitmap nowalbum;

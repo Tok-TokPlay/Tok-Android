@@ -18,6 +18,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -65,13 +66,18 @@ public class LoadingActivity extends AppCompatActivity {
                 Log.i("Txt", "폴더 생성 성공");
             }
             File savefile = new File(dirPath + "/tokdata.txt");
-            FileInputStream fos = new FileInputStream(savefile);
-
-
-            if(fos.read()==0||fos.read()==1){
+            FileReader fileReader = new FileReader(savefile);
+            int c=0;
+            while((c=fileReader.read())!=-1){
+                Log.i("Start::",""+c);
+            }
+            //FileInputStream fos = new FileInputStream(savefile);
+            //Log.i("Start:
+            fileReader.close();
+           /* if(fos.read()==0||fos.read()==1){
                 FlagControl.LOCK_ON=fos.read();
             }
-            fos.close();
+            fos.close();*/
         } catch (Exception e) {
             e.printStackTrace();
         }
