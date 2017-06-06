@@ -48,8 +48,6 @@ public class MusicService extends Service {
             StartingActivity.startPauseBtn.setImageResource(R.drawable.starting_stop);
             musicObject.seekTo(musicObject.getCurrentPosition());
             musicObject.start();
-           /* FlagControl.MUSIC_PLAYING_NOW=1; *///현재 노래 재생중임을 알린다.
-            //노래재생
         } else if (FlagControl.MUSIC_PLAYING_NOW==1&&FlagControl.MUSIC_PAUSE==0) {
             Log.i("Service", "MUSIC_PAUSE 걸림");
             StartingActivity.startPauseBtn.setImageResource(R.drawable.startactivity_background_top);

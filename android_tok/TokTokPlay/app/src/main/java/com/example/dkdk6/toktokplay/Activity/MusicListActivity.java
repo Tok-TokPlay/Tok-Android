@@ -209,11 +209,10 @@ public class MusicListActivity extends AppCompatActivity {
     @Override
     public void onStop(){
         super.onStop();
-        if(FlagControl.MUSIC_PLAYING_NOW==0||FlagControl.MUSIC_PAUSE==1){
+        if(FlagControl.MUSIC_PLAYING_NOW==0){
             StartingActivity.startPauseBtn.setImageResource(R.drawable.startactivity_background_top);
-        }
-        else{
-           StartingActivity.startPauseBtn.setImageResource(R.drawable.starting_stop);
+        }else if(FlagControl.MUSIC_PLAYING_NOW==1){
+            StartingActivity.startPauseBtn.setImageResource(R.drawable.starting_stop);
         }
     }
 

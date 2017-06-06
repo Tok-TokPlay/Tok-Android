@@ -173,15 +173,4 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
                 break;
         }
     }
-    @Override
-    public void onStop(){
-        super.onStop();
-        if(FlagControl.MUSIC_PLAYING_NOW==0||FlagControl.MUSIC_PAUSE==1){
-            StartingActivity.startPauseBtn.setImageResource(R.drawable.startactivity_background_top);
-        }
-        else {
-            StartingActivity.startPauseBtn.setImageResource(R.drawable.starting_stop);
-        }
-
-    }
 }
