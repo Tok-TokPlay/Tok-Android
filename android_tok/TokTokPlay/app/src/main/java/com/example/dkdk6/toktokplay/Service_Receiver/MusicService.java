@@ -41,6 +41,7 @@ public class MusicService extends Service {
         Log.i("Service", "onPause");
         if (FlagControl.MUSIC_PAUSE==1) { //SERVICE_PAUSE_FLAG는 Service에서 제어하기 위한
             Log.i("Service", "MUSIC_PAUSE해재");
+            FlagControl.MUSIC_PLAYING_NOW=1;
             musicObject.seekTo(musicObject.getCurrentPosition());
             musicObject.start();
            /* FlagControl.MUSIC_PLAYING_NOW=1; *///현재 노래 재생중임을 알린다.
@@ -55,9 +56,10 @@ public class MusicService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
             if (FlagControl.MUSIC_PLAYING_NOW==0) { //일시정지상태가 아니다
                 Log.i("Service", "onStartCommand, MUSIC_PLAY_NOW");
+                FlagControl.MUSIC_PLAYING_NOW=1; //현재 노래 재생중임을 알린다.
                 musicObject = MediaPlayer.create(this, MusicPlayerActivity.playerUri);
                 musicObject.start();
-                FlagControl.MUSIC_PLAYING_NOW=1; //현재 노래 재생중임을 알린다.
+
             } else if (FlagControl.MUSIC_PLAYING_NOW==1) { //일시정지가 걸린 상태다
                 Log.i("Service", "onStartCommand, MUSIC_PLAY_NOW==1");
                 onPause();

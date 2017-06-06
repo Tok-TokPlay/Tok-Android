@@ -29,12 +29,12 @@ import static com.example.dkdk6.toktokplay.Activity.MusicListActivity.intent2;
 
 public class MusicPlayerActivity extends AppCompatActivity implements View.OnClickListener {
     public static Uri playerUri;
-    public static ArrayList<MusicDto> list;
+    public ArrayList<MusicDto> list;
     private TextView title;
     private ImageView album, previous, play, pause, next;
     private int play_flag = 0;
     private ContentResolver res;
-    public static int position;
+    public int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +44,18 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
         /*
         초기화 할 부분
          */
+        if(FlagControl.APP_SEARCHING_CONTROL==0){
+            FlagControl.APP_SEARCHING_CONTROL=-1;
+        }
+  /*      if(FlagControl.ON_PLAY_LIST==1){
+            FlagControl.ON_PLAY_LIST=0;
+        }*/
         title = (TextView) findViewById(R.id.title);
         album = (ImageView) findViewById(R.id.album);
+
         position = intent.getIntExtra("position", 0);
         list = (ArrayList<MusicDto>) intent.getSerializableExtra("playlist");
+        Log.i("MusicName2",list.get(position).getTitle());
         res = getContentResolver();
         previous = (ImageView) findViewById(R.id.pre);
         play = (ImageView) findViewById(R.id.start_music);

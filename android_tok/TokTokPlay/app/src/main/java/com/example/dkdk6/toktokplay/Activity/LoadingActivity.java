@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.logging.Handler;
 
 /**
@@ -55,7 +56,7 @@ public class LoadingActivity extends AppCompatActivity {
     }
 
     public void WriteTextFile() {
-
+        ArrayList<Integer> saveInfo = new ArrayList<Integer>();
         String dirPath = getFilesDir().getAbsolutePath();
         File file = new File(dirPath);
         try {
@@ -65,6 +66,8 @@ public class LoadingActivity extends AppCompatActivity {
             }
             File savefile = new File(dirPath + "/tokdata.txt");
             FileInputStream fos = new FileInputStream(savefile);
+
+
             if(fos.read()==0||fos.read()==1){
                 FlagControl.LOCK_ON=fos.read();
             }

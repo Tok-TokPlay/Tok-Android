@@ -137,6 +137,7 @@ public class StartingActivity extends AppCompatActivity {
         try {
            FileOutputStream fos = new FileOutputStream(savefile);
             fos.write(FlagControl.LOCK_ON);
+            fos.write(FlagControl.MUSIC_PLAYING_NOW);
             fos.close();
         } catch (Exception e) {
             e.printStackTrace();

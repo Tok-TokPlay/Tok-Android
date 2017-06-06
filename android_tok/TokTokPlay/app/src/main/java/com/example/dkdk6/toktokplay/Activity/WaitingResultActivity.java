@@ -39,23 +39,23 @@ public class WaitingResultActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotateanim);
         image.setAnimation(animation);
         //진희테스트용
-        ClientConnect cc = new ClientConnect("165.194.17.28", beatarray);//////
+        //ClientConnect cc = new ClientConnect("165.194.17.28", beatarray);//////
         android.os.Handler mHandler2 = new android.os.Handler();
         mHandler2.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.d("DB_Testing2_waitAct",FlagControl.musicKey);
+                //Log.d("DB_Testing2_waitAct",FlagControl.musicKey);
                 //받은 다음 재상이 디비에 String정보를 다시 받아서 (Static 변수로) Intent Gogo putExtra해주면됨.
                 //도경테스트용
                 //여기에 가수, 곡명 받아와짐
                 tempResult_T = FlagControl.receiveTitle;
                 tempResult_A = FlagControl.receiveArtist;
-                if (!FlagControl.musicKey.equals(null)) {
+ /*               if (!FlagControl.musicKey.equals(null)) {
                     Log.d("DB_Testing3_waitAct", FlagControl.receiveTitle);
                     Log.d("DB_Testing3_waitAct", FlagControl.receiveArtist);
                     tempResult_T = FlagControl.receiveTitle;
                     tempResult_A = FlagControl.receiveArtist;
-                }
+                }*/
                 if (FlagControl.APP_SEARCHING_CONTROL == 1) {
                     Log.d("여기",tempResult_A);
                     //APP 검색 한 경우
@@ -74,6 +74,6 @@ public class WaitingResultActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        }, (60 * 1000));
+        }, (2 * 1000)); //나중에바꿔
     }
 }
