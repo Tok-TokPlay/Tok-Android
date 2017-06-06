@@ -44,10 +44,6 @@ public class WaitingResultActivity extends AppCompatActivity {
         mHandler2.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //Log.d("DB_Testing2_waitAct",FlagControl.musicKey);
-                //받은 다음 재상이 디비에 String정보를 다시 받아서 (Static 변수로) Intent Gogo putExtra해주면됨.
-                //도경테스트용
-                //여기에 가수, 곡명 받아와짐
                 tempResult_T = FlagControl.receiveTitle;
                 tempResult_A = FlagControl.receiveArtist;
                 if (!FlagControl.musicKey.equals(null)) {
@@ -75,6 +71,6 @@ public class WaitingResultActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        }, (1 * 1000)); //나중에바꿔
+        }, (360 * 1000)); //나중에바꿔
     }
 }

@@ -23,8 +23,9 @@ public class SearchingActivity extends AppCompatActivity {
     private ImageView imageView;
     private ArrayList<Integer> beatarray = new ArrayList<Integer>();
     private boolean touch = false;
-    private boolean timerStart = false, ticFrag=false;
+    private boolean timerStart = false, ticFrag=false, stopFlag=false;
     private CountDownTimer mCountDown = null;
+
     private int tickCount = 0;
     int x=0;
     @Override
@@ -35,7 +36,6 @@ public class SearchingActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(1000); //0.3초동안 진동..
-        receiveBeat();
         imageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -43,18 +43,10 @@ public class SearchingActivity extends AppCompatActivity {
                     Log.i("Touching","now");
                     beatarray.add(1);
                     receiveBeat();
-
                 }
                 return true;
             }
         });
-/*        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                beatarray.add(1);
-                receiveBeat();
-        }
-        });*/
         Log.i("터치3","");
     }
 
@@ -62,21 +54,9 @@ public class SearchingActivity extends AppCompatActivity {
         Log.i("Touching","receiveB");
         timerStart=true;
         if (timerStart == true) {
-            mCountDown = new CountDownTimer(10000, 50) {//1초 1000->10000
+            mCountDown = new CountDownTimer(15000, 50) {//1초 1000->10000
                 @Override
                 public void onTick(long l) {
-                    /*imageView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            touch = true;
-                        }
-                    });
-                    if (touch == true) {
-                        beatarray.add(1);
-                        touch = false;
-                    } else if (touch == false) {
-                        beatarray.add(0);
-                    }*/
                     imageView.setOnTouchListener(new View.OnTouchListener() {
                         @Override
                         public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -99,17 +79,21 @@ public class SearchingActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onFinish() {
-                    Log.i("Touching","receiveB");
-                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    vibrator.vibrate(100); //0.3초동안 진동
-                    timerStart = false;
-                    imageView.setEnabled(false);
-                    Log.d("beatarry > ", "시간종료");
-                    for (int k = 0; k < beatarray.size(); k++) {
-                        Log.d("beatarry > ", ""+beatarray.get(k));
+                    if(stopFlag==false){
+                        stopFlag=true;
+                        Log.i("Touching","receiveB");
+                        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                        vibrator.vibrate(100); //0.3초동안 진동
+                        timerStart = false;
+                        imageView.setEnabled(false);
+                        Log.d("beatarry > ", "시간종료");
+                        for (int k = 0; k < beatarray.size(); k++) {
+                            Log.d("beatarry > ", "" + beatarray.get(k));
+                        }
+                        sendToServer(beatarray);
+                        //searchingActivity로 넘어갈 것
                     }
-                    sendToServer(beatarray);
-                    //searchingActivity로 넘어갈 것
+
                 }
             }.start();
         }
