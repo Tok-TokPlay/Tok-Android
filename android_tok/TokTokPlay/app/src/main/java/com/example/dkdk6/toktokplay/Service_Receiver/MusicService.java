@@ -21,10 +21,6 @@ public class MusicService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // Service 객체와 (화면단 Activity 사이에서)
-        // 통신(데이터를 주고받을) 때 사용하는 메서드
-        // 데이터를 전달할 필요가 없으면 return null;
-//리스너에서 끝났다는 표시가 오면 서비스에서 엑티비티에 다시 신호를 줌 -> 다시 서비스를 진행한다.
         return null;
     }
 
@@ -59,7 +55,6 @@ public class MusicService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
             if (FlagControl.MUSIC_PLAYING_NOW==0) { //일시정지상태가 아니다
                 Log.i("Service", "onStartCommand, MUSIC_PLAY_NOW");
-                Log.i("영운","몰라20");
                 FlagControl.MUSIC_PLAYING_NOW=1; //현재 노래 재생중임을 알린다.
                 musicObject = MediaPlayer.create(this, MusicPlayerActivity.playerUri);
                 musicObject.start();

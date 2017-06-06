@@ -69,15 +69,14 @@ public class LoadingActivity extends AppCompatActivity {
             FileReader fileReader = new FileReader(savefile);
             int c=0;
             while((c=fileReader.read())!=-1){
-                Log.i("Start::",""+c);
+                c=fileReader.read();
             }
+            c=FlagControl.LOCK_ON;
             //FileInputStream fos = new FileInputStream(savefile);
             //Log.i("Start:
+            Log.i("Start:",""+c);
             fileReader.close();
-           /* if(fos.read()==0||fos.read()==1){
-                FlagControl.LOCK_ON=fos.read();
-            }
-            fos.close();*/
+
         } catch (Exception e) {
             e.printStackTrace();
         }
