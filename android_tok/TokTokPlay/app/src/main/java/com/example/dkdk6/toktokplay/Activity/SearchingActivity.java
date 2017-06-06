@@ -19,14 +19,13 @@ import java.util.ArrayList;
  * Created by dkdk6 on 2017-05-09.
  */
 
-public class SearchingActivity extends AppCompatActivity implements View.OnTouchListener {
+public class SearchingActivity extends AppCompatActivity {
     private ImageView imageView;
     private ArrayList<Integer> beatarray = new ArrayList<Integer>();
     private boolean touch = false;
-    private boolean timerStart = false;
+    private boolean timerStart = false, ticFrag=false;
     private CountDownTimer mCountDown = null;
     private int tickCount = 0;
-    private boolean touchFlag=true;
     int x=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,73 +36,64 @@ public class SearchingActivity extends AppCompatActivity implements View.OnTouch
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(1000); //0.3초동안 진동..
         receiveBeat();
-        /*imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                beatarray.add(1);
-                receiveBeat();
-        }
-        });*/
-       /* imageView.setOnTouchListener(new View.OnTouchListener() {
+        imageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                Log.i("터치1","");
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                    Log.i("터치2","");
+                    Log.i("Touching","now");
+                    beatarray.add(1);
+                    receiveBeat();
+
                 }
                 return true;
             }
-        });*/
-        Log.i("터치3","");
-        ///error
-        /*imageView.setOnClickListener(new View.OnClickListener() {
+        });
+/*        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 beatarray.add(1);
-                timerStart = true;
-                touch = true;
                 receiveBeat();
-            }
+        }
         });*/
-        //수정//
+        Log.i("터치3","");
     }
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            touchFlag=true;
-        }
-        if (event.getAction() == MotionEvent.ACTION_UP){
-            touchFlag=false;
-        }
-        return true;
-    }
+
     protected void receiveBeat() {
         Log.i("Touching","receiveB");
-        imageView.setOnTouchListener(this);
+        timerStart=true;
         if (timerStart == true) {
-            mCountDown = new CountDownTimer(1000, 50) {//1초 1000->10000
+            mCountDown = new CountDownTimer(10000, 50) {//1초 1000->10000
                 @Override
                 public void onTick(long l) {
-                    Log.i("Touching","receiveB");
-                    imageView.setOnTouchListener(SearchingActivity.this);
                     /*imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             touch = true;
                         }
                     });
-
                     if (touch == true) {
                         beatarray.add(1);
                         touch = false;
                     } else if (touch == false) {
                         beatarray.add(0);
                     }*/
-                    if(touchFlag==true){
-                        Log.i("Touching","true");
-                        beatarray.add(1);
-                    }else if(touchFlag==false){
-                        Log.i("Touching","False");
+                    imageView.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View view, MotionEvent motionEvent) {
+                            if(motionEvent.getAction()==MotionEvent.ACTION_MOVE){
+                                Log.i("Touching","now2");
+                                beatarray.add(1);
+                                ticFrag=true;
+                                receiveBeat();
+                            }else if(motionEvent.getAction()==MotionEvent.ACTION_UP){
+                                Log.i("Touching","now3");
+                                beatarray.add(0);
+                                ticFrag=false;
+                            }
+                            return true;
+                        }
+                    });
+                    if(ticFrag==false){
                         beatarray.add(0);
                     }
                 }
