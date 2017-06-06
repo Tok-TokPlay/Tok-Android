@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -18,23 +19,44 @@ import java.util.ArrayList;
  * Created by dkdk6 on 2017-05-09.
  */
 
-public class SearchingActivity extends AppCompatActivity {
+public class SearchingActivity extends AppCompatActivity implements View.OnTouchListener {
     private ImageView imageView;
     private ArrayList<Integer> beatarray = new ArrayList<Integer>();
     private boolean touch = false;
     private boolean timerStart = false;
     private CountDownTimer mCountDown = null;
     private int tickCount = 0;
-
+    private boolean touchFlag=true;
+    int x=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searching_activity);
+        Log.i("터치0","");
         imageView = (ImageView) findViewById(R.id.imageView);
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(1000); //0.3초동안 진동
+        vibrator.vibrate(1000); //0.3초동안 진동..
+        receiveBeat();
+        /*imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                beatarray.add(1);
+                receiveBeat();
+        }
+        });*/
+       /* imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Log.i("터치1","");
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    Log.i("터치2","");
+                }
+                return true;
+            }
+        });*/
+        Log.i("터치3","");
         ///error
-        imageView.setOnClickListener(new View.OnClickListener() {
+        /*imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 beatarray.add(1);
@@ -42,29 +64,52 @@ public class SearchingActivity extends AppCompatActivity {
                 touch = true;
                 receiveBeat();
             }
-        });
+        });*/
+        //수정//
     }
-
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            touchFlag=true;
+        }
+        if (event.getAction() == MotionEvent.ACTION_UP){
+            touchFlag=false;
+        }
+        return true;
+    }
     protected void receiveBeat() {
+        Log.i("Touching","receiveB");
+        imageView.setOnTouchListener(this);
         if (timerStart == true) {
-            mCountDown = new CountDownTimer(10000, 50) {//1초 1000->10000
+            mCountDown = new CountDownTimer(1000, 50) {//1초 1000->10000
                 @Override
                 public void onTick(long l) {
-                    imageView.setOnClickListener(new View.OnClickListener() {
+                    Log.i("Touching","receiveB");
+                    imageView.setOnTouchListener(SearchingActivity.this);
+                    /*imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             touch = true;
                         }
                     });
+
                     if (touch == true) {
                         beatarray.add(1);
                         touch = false;
                     } else if (touch == false) {
                         beatarray.add(0);
+                    }*/
+                    if(touchFlag==true){
+                        Log.i("Touching","true");
+                        beatarray.add(1);
+                    }else if(touchFlag==false){
+                        Log.i("Touching","False");
+                        beatarray.add(0);
                     }
                 }
                 @Override
                 public void onFinish() {
+                    Log.i("Touching","receiveB");
                     Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                     vibrator.vibrate(100); //0.3초동안 진동
                     timerStart = false;
