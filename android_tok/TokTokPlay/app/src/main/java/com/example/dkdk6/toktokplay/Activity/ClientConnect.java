@@ -7,13 +7,16 @@ package com.example.dkdk6.toktokplay.Activity;
 /**
  * Created by 4p on 2017-05-31.
  */
-import android.content.Intent;
 import android.util.Log;
 
 import com.example.dkdk6.toktokplay.FlagControl;
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 
 class ClientConnect
@@ -21,7 +24,7 @@ class ClientConnect
     ArrayList<Integer> userBeat;
     Socket client = null;
     String ipAddress; //접속을 요청할 Server의 IP 주소를 저장할 변수
-    static final int port = 9209; //접속을 요청할 Server의 port 번호와 동일하게 지정
+    static final int port = 9880; //접속을 요청할 Server의 port 번호와 동일하게 지정
     BufferedReader read;
 
     //입력용 Stream

@@ -54,28 +54,31 @@ public class SearchingActivity extends AppCompatActivity {
         Log.i("Touching","receiveB");
         timerStart=true;
         if (timerStart == true) {
-            mCountDown = new CountDownTimer(15000, 50) {//1초 1000->10000
+            mCountDown = new CountDownTimer(10000, 50) {//1초 1000->10000
                 @Override
                 public void onTick(long l) {
                     imageView.setOnTouchListener(new View.OnTouchListener() {
                         @Override
                         public boolean onTouch(View view, MotionEvent motionEvent) {
-                            if(motionEvent.getAction()==MotionEvent.ACTION_MOVE){
-                                Log.i("Touching","now2");
-                                beatarray.add(1);
-                                ticFrag=true;
-                                receiveBeat();
-                            }else if(motionEvent.getAction()==MotionEvent.ACTION_UP){
-                                Log.i("Touching","now3");
-                                beatarray.add(0);
-                                ticFrag=false;
+                            switch (motionEvent.getAction()){
+                                case MotionEvent.ACTION_UP:
+                                    Log.i("Touching","now3");
+                                    beatarray.add(0);
+                                    ticFrag=false;
+                                    break;
+                                default:
+                                    Log.i("Touching","default");
+
+                                case MotionEvent.ACTION_DOWN:
+                                    Log.i("Touching","now2");
+                                    beatarray.add(1);
+                                    ticFrag=true;
+                                    receiveBeat();
+                                    break;
                             }
                             return true;
                         }
                     });
-                    if(ticFrag==false){
-                        beatarray.add(0);
-                    }
                 }
                 @Override
                 public void onFinish() {
@@ -90,6 +93,7 @@ public class SearchingActivity extends AppCompatActivity {
                         for (int k = 0; k < beatarray.size(); k++) {
                             Log.d("beatarry > ", "" + beatarray.get(k));
                         }
+                        Log.i("Touching_beatarray",beatarray.toString());
                         sendToServer(beatarray);
                         //searchingActivity로 넘어갈 것
                     }
