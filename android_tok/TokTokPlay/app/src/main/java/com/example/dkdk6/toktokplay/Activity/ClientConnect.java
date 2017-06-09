@@ -24,7 +24,7 @@ class ClientConnect
     ArrayList<Integer> userBeat;
     Socket client = null;
     String ipAddress; //접속을 요청할 Server의 IP 주소를 저장할 변수
-    static final int port = 9880; //접속을 요청할 Server의 port 번호와 동일하게 지정
+    static final int port = 9881; //접속을 요청할 Server의 port 번호와 동일하게 지정
     BufferedReader read;
 
     //입력용 Stream

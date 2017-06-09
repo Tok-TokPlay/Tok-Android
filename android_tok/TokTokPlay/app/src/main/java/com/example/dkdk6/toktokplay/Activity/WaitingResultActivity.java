@@ -71,6 +71,6 @@ public class WaitingResultActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        }, (3600 * 1000)); //나중에바꿔
+        }, (1800 * 1000)); //나중에바꿔
     }
 }
