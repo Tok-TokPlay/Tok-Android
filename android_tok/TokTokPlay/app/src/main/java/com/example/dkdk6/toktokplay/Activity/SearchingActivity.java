@@ -55,7 +55,7 @@ public class SearchingActivity extends AppCompatActivity {
         Log.i("Touching","receiveB");
         timerStart=true;
         if (timerStart == true) {
-            mCountDown = new CountDownTimer(20000, 50) {//1초 1000->10000
+            mCountDown = new CountDownTimer(15000, 50) {//1초 1000->10000
                 @Override
                 public void onTick(long l) {
                     imageView.setOnTouchListener(new View.OnTouchListener() {
