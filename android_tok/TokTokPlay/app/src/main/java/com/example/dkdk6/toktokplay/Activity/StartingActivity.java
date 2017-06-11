@@ -63,6 +63,7 @@ public class StartingActivity extends AppCompatActivity {
         if(FlagControl.MUSIC_PLAYING_NOW==0||FlagControl.MUSIC_PAUSE==1){
             startPauseBtn.setImageResource(R.drawable.startactivity_background_top);
         }
+
         startPauseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

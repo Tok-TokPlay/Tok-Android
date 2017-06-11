@@ -182,7 +182,6 @@ public class MusicListActivity extends AppCompatActivity {
             };
             Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                     projection, null, null, null);
-
             while (cursor.moveToNext()) {
                 for(int i=0; i<serverTitle.size();i++){
                     if ((cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)).contains(serverTitle.get(i))) && (cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)).contains(serverArtist.get(i)))) {

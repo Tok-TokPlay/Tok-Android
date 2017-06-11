@@ -26,7 +26,7 @@ public class SearchingActivity extends AppCompatActivity {
     private boolean timerStart = false, ticFrag=false, stopFlag=false;
     private CountDownTimer mCountDown = null;
 
-    private int tickCount = 0;
+    private int tickCount = 0, one=0, zero=0;
     int x=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class SearchingActivity extends AppCompatActivity {
                             switch (motionEvent.getAction()){
                                 case MotionEvent.ACTION_UP:
                                     Log.i("Touching","now3");
-                                    beatarray.add(0);
+
                                     ticFrag=false;
                                     break;
                                 default:
@@ -72,13 +72,18 @@ public class SearchingActivity extends AppCompatActivity {
                                 case MotionEvent.ACTION_DOWN:
                                     Log.i("Touching","now2");
                                     beatarray.add(1);
-                                    ticFrag=true;
+
                                     receiveBeat();
                                     break;
                             }
                             return true;
                         }
                     });
+                    if(ticFrag==false){
+                        beatarray.add(0);
+                    }else if(ticFrag==true){
+                        ticFrag=true;
+                    }
                 }
                 @Override
                 public void onFinish() {
@@ -91,15 +96,12 @@ public class SearchingActivity extends AppCompatActivity {
                         imageView.setEnabled(false);
                         Log.d("beatarry > ", "시간종료");
                         for (int k = 0; k < beatarray.size(); k++) {
-<<<<<<< HEAD
                             if(beatarray.get(k)==1){
                                 one++;
                             }else if(beatarray.get(k)==0){
                                 zero++;
                             }
-=======
                             Log.d("beatarry > ", "" + beatarray.get(k));
->>>>>>> parent of 0aea6b8... 안드로이드 터치 확실하게 수정
                         }
                         Log.i("Touching_beatarray",beatarray.toString());
                         sendToServer(beatarray);
