@@ -171,7 +171,6 @@ public class MusicListActivity extends AppCompatActivity {
                     projection, null, null, null);
 
             while (cursor.moveToNext()) {
-
                 if ((cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)).contains(receiveTitle)) && (cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)).contains(receiveArtist))) {
                     Log.i("Testing11",receiveTitle);
                     MusicDto musicDto = new MusicDto();
