@@ -27,7 +27,8 @@ public class WaitingResultActivity extends AppCompatActivity {
     private ArrayList<Integer> beatarray = new ArrayList<Integer>();
     /*    String[] searchResultTitle = {"I LOVE YOU", "Let It Go", "서쪽 하늘"};
         String[] searchResultArtist = {"2NE1", "Idina Menzel", "울랄라 세션"};*/
-    String tempResult_T, tempResult_A;
+    private ArrayList<String> serverTitle = new ArrayList<String>();
+    private ArrayList<String> serverArtist = new ArrayList<String>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,12 +73,12 @@ public class WaitingResultActivity extends AppCompatActivity {
 /*
 바꿈
  */
-         /*       if (!FlagControl.musicKey.equals(null)) {
+                if (!FlagControl.musicKey.equals(null)) {
                     Log.d("DB_Testing3_waitAct", FlagControl.receiveTitle);
                     Log.d("DB_Testing3_waitAct", FlagControl.receiveArtist);
-                    tempResult_T = FlagControl.receiveTitle;
-                    tempResult_A = FlagControl.receiveArtist;
-                }*/
+                    serverTitle =  FlagControl.serverTitle;
+                    serverArtist = FlagControl.serverArtist;
+                }
                 if (FlagControl.APP_SEARCHING_CONTROL == 1) {
        //             Log.d("여기",tempResult_A);
                     //APP 검색 한 경우

@@ -30,7 +30,6 @@ public class MusicListActivity extends AppCompatActivity {
     public ArrayList<MusicDto> list;
     private static String TAG = "PermissionDemo";
     private static final int REQUEST_CODE = 101;
-    private String receiveTitle, receiveArtist;
     private ArrayList<String> serverTitle = new ArrayList<String>();
     private ArrayList<String> serverArtist = new ArrayList<String>();
     @Override
