@@ -41,7 +41,6 @@ public class SearchingActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
                     Log.i("Touching","now");
-                    ticFrag=true;
                     beatarray.add(1);
                     receiveBeat();
                 }
@@ -64,28 +63,25 @@ public class SearchingActivity extends AppCompatActivity {
                             switch (motionEvent.getAction()){
                                 case MotionEvent.ACTION_UP:
                                     Log.i("Touching","now3");
+                                    beatarray.add(0);
                                     ticFrag=false;
                                     break;
                                 default:
                                     Log.i("Touching","default");
+
                                 case MotionEvent.ACTION_DOWN:
                                     Log.i("Touching","now2");
+                                    beatarray.add(1);
                                     ticFrag=true;
+                                    receiveBeat();
                                     break;
                             }
                             return true;
                         }
                     });
-                    if(ticFrag==false){
-                        beatarray.add(0);
-                    }else if(ticFrag==true){
-                        beatarray.add(1);
-                    }
                 }
                 @Override
                 public void onFinish() {
-                    int one =0;
-                    int zero =0;
                     if(stopFlag==false){
                         stopFlag=true;
                         Log.i("Touching","receiveB");
@@ -95,16 +91,19 @@ public class SearchingActivity extends AppCompatActivity {
                         imageView.setEnabled(false);
                         Log.d("beatarry > ", "시간종료");
                         for (int k = 0; k < beatarray.size(); k++) {
+<<<<<<< HEAD
                             if(beatarray.get(k)==1){
                                 one++;
                             }else if(beatarray.get(k)==0){
                                 zero++;
                             }
+=======
+                            Log.d("beatarry > ", "" + beatarray.get(k));
+>>>>>>> parent of 0aea6b8... 안드로이드 터치 확실하게 수정
                         }
-                        Log.d("beatarry one > ", "" + one);
-                        Log.d("beatarry zero > ", "" + zero);
                         Log.i("Touching_beatarray",beatarray.toString());
                         sendToServer(beatarray);
+                        //searchingActivity로 넘어갈 것
                     }
 
                 }
