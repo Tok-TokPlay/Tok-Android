@@ -31,7 +31,8 @@ public class MusicListActivity extends AppCompatActivity {
     private static String TAG = "PermissionDemo";
     private static final int REQUEST_CODE = 101;
     private String receiveTitle, receiveArtist;
-
+    private ArrayList<String> serverTitle = new ArrayList<String>();
+    private ArrayList<String> serverArtist = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +46,11 @@ public class MusicListActivity extends AppCompatActivity {
         }
         if (FlagControl.APP_SEARCHING_CONTROL == 0) { //검색으로 온 경우만 이 과정 진행해야 한다.
             Intent rintent = getIntent();
-            receiveTitle = rintent.getStringExtra("RKey_T");
-            receiveArtist = rintent.getStringExtra("RKey_A");
-            Log.i("진희가테스트하라고시킨내용", ";" + receiveTitle + "AA" + receiveArtist);
+            serverTitle = rintent.getStringArrayListExtra("RKey_T");
+            serverArtist = rintent.getStringArrayListExtra("RKey_A");
+/*            receiveTitle = rintent.getStringExtra("RKey_T");
+            receiveArtist = rintent.getStringExtra("RKey_A");*/
+            Log.i("진희가테스트하라고시킨내용", ";"+""+serverTitle.size());
         }
         intent2 = new Intent(getApplicationContext(), MusicService.class);
         if (FlagControl.APP_SEARCHING_CONTROL == 0) {
@@ -65,13 +68,23 @@ public class MusicListActivity extends AppCompatActivity {
                 stopService(intent2);
             }*/
             makeNotification();
-            /*검색결과를 받아서 putExtra에서 List목록 중 찾아서 position에 넣어주면되요*/
-            Intent intent = new Intent(MusicListActivity.this, MusicPlayerActivity.class);
-            intent.putExtra("position", 0);
-            Log.i("MusicName",list.get(0).getTitle());
-            intent.putExtra("playlist", list);
-            startActivity(intent);
-            finish();
+            listView = (ListView) findViewById(R.id.listview);
+            MyAdapter adapter = new MyAdapter(this, list);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    stopService(intent2);
+                    Intent intent = new Intent(MusicListActivity.this, MusicPlayerActivity.class);
+                    makeNotification();
+                    Log.i("Testing7.position", "" + position);
+                    intent.putExtra("position", position);
+                    Log.i("MusicName",list.get(position).getTitle());
+                    intent.putExtra("playlist", list);
+                    startActivity(intent);
+                    finish();
+                }
+            });
         } else if (FlagControl.ON_PLAY_LIST == 1 && FlagControl.APP_SEARCHING_CONTROL == -1) { //앱으로 검색해서 List를 보여줘야 하는 경우라면?
             Log.i("Testing4:Starting", "g");
             Log.i("Testing1", "MusicList");
@@ -171,15 +184,15 @@ public class MusicListActivity extends AppCompatActivity {
                     projection, null, null, null);
 
             while (cursor.moveToNext()) {
-                if ((cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)).contains(receiveTitle)) && (cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)).contains(receiveArtist))) {
-                    Log.i("Testing11",receiveTitle);
-                    MusicDto musicDto = new MusicDto();
-                    musicDto.setId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
-                    musicDto.setAlbumId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
-                    musicDto.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
-                    musicDto.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
-                    list.add(musicDto);
-                    Log.i("Testing11", ""+list.size());
+                for(int i=0; i<serverTitle.size();i++){
+                    if ((cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)).contains(serverTitle.get(i))) && (cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)).contains(serverArtist.get(i)))) {
+                        MusicDto musicDto = new MusicDto();
+                        musicDto.setId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
+                        musicDto.setAlbumId(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
+                        musicDto.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
+                        musicDto.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
+                        list.add(musicDto);
+                    }
                 }
             }
             cursor.close();

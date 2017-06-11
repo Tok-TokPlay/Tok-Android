@@ -52,7 +52,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
         album = (ImageView) findViewById(R.id.album);
         position = intent.getIntExtra("position", 0);
         list = (ArrayList<MusicDto>) intent.getSerializableExtra("playlist");
-        Log.i("MusicName2",list.get(position).getTitle());
+
         if(fake==10){
             FlagControl.FAKE=1;
             playMusic(list.get(position));
@@ -60,6 +60,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
             Log.i("영운","몰라2");
             finish();
         }
+
         res = getContentResolver();
         previous = (ImageView) findViewById(R.id.pre);
         play = (ImageView) findViewById(R.id.start_music);

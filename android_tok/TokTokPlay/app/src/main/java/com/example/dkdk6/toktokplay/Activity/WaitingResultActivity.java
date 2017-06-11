@@ -22,7 +22,6 @@ import java.util.ArrayList;
  */
 public class WaitingResultActivity extends AppCompatActivity {
     private ImageView image;
-
     int set = 0;
     private View view;
     private ArrayList<Integer> beatarray = new ArrayList<Integer>();
@@ -39,12 +38,12 @@ public class WaitingResultActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotateanim);
         image.setAnimation(animation);
         //진희테스트용
-        ClientConnect cc = new ClientConnect("165.194.17.108", beatarray);//////
+        //ClientConnect cc = new ClientConnect("165.194.17.108", beatarray);//////
         android.os.Handler mHandler2 = new android.os.Handler();
         mHandler2.postDelayed(new Runnable() {
             @Override
             public void run() {
-                tempResult_T = FlagControl.receiveTitle;
+/*              tempResult_T = FlagControl.receiveTitle;
                 tempResult_A = FlagControl.receiveArtist;
                 if (!FlagControl.musicKey.equals(null)) {
                     Log.d("DB_Testing3_waitAct", FlagControl.receiveTitle);
@@ -69,8 +68,35 @@ public class WaitingResultActivity extends AppCompatActivity {
                     PlaymusicIntent.putExtra("RKey_A", tempResult_A);
                     startActivity(PlaymusicIntent);
                     finish();
+                }*/
+/*
+바꿈
+ */
+         /*       if (!FlagControl.musicKey.equals(null)) {
+                    Log.d("DB_Testing3_waitAct", FlagControl.receiveTitle);
+                    Log.d("DB_Testing3_waitAct", FlagControl.receiveArtist);
+                    tempResult_T = FlagControl.receiveTitle;
+                    tempResult_A = FlagControl.receiveArtist;
+                }*/
+                if (FlagControl.APP_SEARCHING_CONTROL == 1) {
+       //             Log.d("여기",tempResult_A);
+                    //APP 검색 한 경우
+                    Intent PlaymusicIntent = new Intent(WaitingResultActivity.this, youtubeTesting.class);
+                    PlaymusicIntent.putExtra("RKey_T", FlagControl.serverTitle);
+                    PlaymusicIntent.putExtra("RKey_A", FlagControl.serverArtist);
+                    startActivity(PlaymusicIntent);
+                    finish();
+                } else if (FlagControl.APP_SEARCHING_CONTROL == 0) {
+                    Log.i("LogTesting",""+FlagControl.APP_SEARCHING_CONTROL);
+                    //잠금화면에서 검색을 한 경우
+//                    Log.d("RKEY",tempResult_A);
+                    Intent PlaymusicIntent = new Intent(WaitingResultActivity.this, MusicListActivity.class);
+                    PlaymusicIntent.putExtra("RKey_T", FlagControl.serverTitle);
+                    PlaymusicIntent.putExtra("RKey_A", FlagControl.serverArtist);
+                    startActivity(PlaymusicIntent);
+                    finish();
                 }
             }
-        }, (1800 * 1000)); //나중에바꿔
+        }, (10 * 1000)); //나중에바꿔(1->18)
     }
 }

@@ -25,6 +25,7 @@ public class NavigateFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.i("LogTesting","z");
         FlagControl.APP_SEARCHING_CONTROL = 0;
+                /*나중에삭제*/
         Log.i("LogTesting",""+FlagControl.APP_SEARCHING_CONTROL);
         View view = inflater.inflate(R.layout.navigatefragment,container,false);
         return view;

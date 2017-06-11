@@ -34,10 +34,7 @@ class ClientConnect
     //출력용 Stream
     OutputStream os;
     ObjectOutputStream oos;
-
-    String sendData;
     String receiveData;
-
     ClientConnect(String ip, ArrayList<Integer> beat)
     {
         ipAddress = ip; //생성자의 IP Address를 ipAddress 맴버변수에 저장
@@ -53,8 +50,6 @@ class ClientConnect
                     Log.v("test1","22");
                     Log.v("ip",ipAddress);
                     client = new Socket(ipAddress,port);
-
-
 
                     //*** Server로 message를 송신하기 위한 출력 Stream ***//
                     os = client.getOutputStream();
@@ -84,8 +79,12 @@ class ClientConnect
                     Log.d("DB_Testing1_musickey",receiveData);
                     String[] words = receiveData.split(":");
                     Log.d("DB_Testing_musickey>>",words[0]);
-                    FlagControl.receiveTitle = words[0];
-                    FlagControl.receiveArtist = words[1];
+    /*                FlagControl.receiveTitle = words[0];
+                    FlagControl.receiveArtist = words[1];*/
+                    for(int i=1; i<4;i+=2){
+                        FlagControl.serverTitle.add(words[i]);
+                        FlagControl.serverArtist.add(words[i+1]);
+                    }
                     Log.d("DB_Testing1-2_musickey",FlagControl.receiveTitle);
                     for (String wo : words ){
                         System.out.println(wo);

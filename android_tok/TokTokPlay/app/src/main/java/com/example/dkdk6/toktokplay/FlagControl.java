@@ -2,6 +2,7 @@ package com.example.dkdk6.toktokplay;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.example.dkdk6.toktokplay.Activity.MusicDto;
 import com.example.dkdk6.toktokplay.Service_Receiver.MusicService;
@@ -27,4 +28,7 @@ public class FlagControl {
     public static String receiveTitle = "I LUV IT";
     public static String receiveArtist = "싸이 (Psy)";
     public static String musicKey;
+    public static ArrayList<String> serverTitle = new ArrayList<String>();
+    public static ArrayList<String> serverArtist = new ArrayList<String>();
+
 }

@@ -36,6 +36,13 @@ public class StartingActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.starting_activity);
+        /*나중에삭제*/
+        FlagControl.serverTitle.add("좋다고 말해");
+        FlagControl.serverArtist.add("볼빨간사춘기");
+        FlagControl.serverTitle.add("자격지심");
+        FlagControl.serverArtist.add("박경");
+        FlagControl.serverTitle.add("YESTERDAY");
+        FlagControl.serverArtist.add("블락비");
         int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             makeRequest();
