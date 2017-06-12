@@ -41,6 +41,7 @@ public class SearchingActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
                     Log.i("Touching","now");
+                    ticFrag=true;
                     beatarray.add(1);
                     receiveBeat();
                 }
@@ -54,7 +55,7 @@ public class SearchingActivity extends AppCompatActivity {
         Log.i("Touching","receiveB");
         timerStart=true;
         if (timerStart == true) {
-            mCountDown = new CountDownTimer(1000, 50) {//1초 1000->20000
+            mCountDown = new CountDownTimer(20000, 50) {//1초 1000->20000
                 @Override
                 public void onTick(long l) {
                     imageView.setOnTouchListener(new View.OnTouchListener() {
@@ -63,7 +64,6 @@ public class SearchingActivity extends AppCompatActivity {
                             switch (motionEvent.getAction()){
                                 case MotionEvent.ACTION_UP:
                                     Log.i("Touching","now3");
-
                                     ticFrag=false;
                                     break;
                                 default:
@@ -71,9 +71,8 @@ public class SearchingActivity extends AppCompatActivity {
 
                                 case MotionEvent.ACTION_DOWN:
                                     Log.i("Touching","now2");
-                                    beatarray.add(1);
 
-                                    receiveBeat();
+                                    ticFrag=true;
                                     break;
                             }
                             return true;
@@ -82,7 +81,7 @@ public class SearchingActivity extends AppCompatActivity {
                     if(ticFrag==false){
                         beatarray.add(0);
                     }else if(ticFrag==true){
-                        ticFrag=true;
+                        beatarray.add(1);
                     }
                 }
                 @Override

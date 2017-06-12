@@ -51,7 +51,6 @@ public class youtubeTesting extends AppCompatActivity {
         for(int i=0; i<serverTitle.size(); i++){
             Song temp = new Song(serverTitle.get(i),serverArtist.get(i));
             s_info_list.add(temp);
-
         }
         SongAdapter myadapter = new SongAdapter(getApplicationContext(),R.layout.song_info, s_info_list);
         listView.setAdapter(myadapter);
