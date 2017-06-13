@@ -17,11 +17,13 @@ package com.example.dkdk6.toktokplay.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.dkdk6.toktokplay.Adapter.SongAdapter;
+import com.example.dkdk6.toktokplay.FlagControl;
 import com.example.dkdk6.toktokplay.R;
 import com.google.android.youtube.player.YouTubeIntents;
 
@@ -48,7 +50,8 @@ public class youtubeTesting extends AppCompatActivity {
         serverTitle = rintent.getStringArrayListExtra("RKey_T");
         serverArtist = rintent.getStringArrayListExtra("RKey_A");
         s_info_list = new ArrayList<Song>();
-        for(int i=0; i<serverTitle.size(); i++){
+        Log.i("LOG : Song Size","" + serverTitle.size());
+        for(int i=0; i < serverTitle.size(); i++){
             Song temp = new Song(serverTitle.get(i),serverArtist.get(i));
             s_info_list.add(temp);
         }

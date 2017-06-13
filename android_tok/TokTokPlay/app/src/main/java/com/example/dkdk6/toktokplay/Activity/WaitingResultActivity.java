@@ -39,7 +39,7 @@ public class WaitingResultActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotateanim);
         image.setAnimation(animation);
         //진희테스트용
-        ClientConnect cc = new ClientConnect("165.194.17.108", beatarray);//////
+        ClientConnect cc = new ClientConnect("125.176.22.223", beatarray);//////
         android.os.Handler mHandler2 = new android.os.Handler();
         mHandler2.postDelayed(new Runnable() {
             @Override
@@ -98,6 +98,6 @@ public class WaitingResultActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        }, (1800 * 1000)); //나중에바꿔(1->18)
+        }, (10 * 1000)); //나중에바꿔(1->18)
     }
 }

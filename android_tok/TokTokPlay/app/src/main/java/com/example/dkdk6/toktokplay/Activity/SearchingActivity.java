@@ -35,7 +35,7 @@ public class SearchingActivity extends AppCompatActivity {
         Log.i("터치0","");
         imageView = (ImageView) findViewById(R.id.imageView);
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(1000); //0.3초동안 진동..
+        vibrator.vibrate(300); //0.3초동안 진동..
         imageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -56,6 +56,7 @@ public class SearchingActivity extends AppCompatActivity {
         timerStart=true;
         if (timerStart == true) {
             mCountDown = new CountDownTimer(20000, 50) {//1초 1000->20000
+                // Wait 1000 * 20 for touch Data.
                 @Override
                 public void onTick(long l) {
                     imageView.setOnTouchListener(new View.OnTouchListener() {
@@ -90,7 +91,7 @@ public class SearchingActivity extends AppCompatActivity {
                         stopFlag=true;
                         Log.i("Touching","receiveB");
                         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                        vibrator.vibrate(100); //0.3초동안 진동
+                        vibrator.vibrate(300); //0.3초동안 진동
                         timerStart = false;
                         imageView.setEnabled(false);
                         Log.d("beatarry > ", "시간종료");
